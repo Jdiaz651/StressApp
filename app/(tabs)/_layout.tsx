@@ -41,6 +41,42 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="AnxietyBreathingMenuScreen"
+        options={{
+          title: 'Breathing Menu',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="AwarenessBehaviorScreen"
+        options={{
+          title: 'Behavior Check',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="AwarenessBodyScreen"
+        options={{
+          title: 'Body Check',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="AwarenessFeelingsScreen"
+        options={{
+          title: 'Body Check',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
