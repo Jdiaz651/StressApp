@@ -33,18 +33,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="About Us"
+        name="AboutUsScreen"
         options={{
-          title: 'AboutUsScreen',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-       <Tabs.Screen
-        name="Timer"
-        options={{
-          title: 'TimerScreen',
+          title: 'About Us',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
