@@ -1,12 +1,20 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Pressable} from 'react-native';
+import { Link } from 'expo-router'
 
-const CustomButton = ({text, onPress, type}) => {
+interface CustomButtonProps {
+  text: string;
+  onPress?: () => {};
+  type: string;
+  href: string;
+}
+
+const CustomButton: React.FC<CustomButtonProps> = ({text, onPress, type, href}) => {
 
   return (
     <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles[`container_${type}`],styles[`pressed_${type}`]] : styles[`container_${type}`]}>
-      <Text style={styles.text, styles[`text_${type}`]}>{text}</Text>
+      <Link href={href} style={styles.text, styles[`text_${type}`]}>{text}</Link>
     </Pressable>
   );
 };

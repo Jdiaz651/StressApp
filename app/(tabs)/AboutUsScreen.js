@@ -12,7 +12,7 @@ const AboutUsScreen = ({ navigation }) => {
     <ScrollView showsVerticalScrollIndicator={false}>
     <View style={styles.root}>
       
-        <CustomButton text= "<" onPress={() => navigation.navigate('Menu Screen')} type="whiteBackButton"/>
+        <CustomButton text= "<" href="OptionScreen" type="whiteBackButton"/>
         <Text style={styles.title}>
         About Us
       </Text>
