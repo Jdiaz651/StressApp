@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
 
-import CustomButton from '../../components/CustomButton';
+import CustomButton from '../components/CustomButton';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import Logo from '../../assets/images/Logo.png';

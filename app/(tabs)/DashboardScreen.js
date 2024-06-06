@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground} from 'react-native';
+import { Link } from 'expo-router'
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
@@ -10,7 +12,7 @@ const DashboardScreen = ({ navigation }) => {
 
   return (
     <View style={styles.root}>
-      <CustomButton text= "≡" onPress={() => navigation.navigate('Menu Screen')} type="dropButton"/>
+      <CustomButton text= "≡" href='/' type="dropButton"/>
       <Text style={styles.title}>
         Home
       </Text>
@@ -18,25 +20,25 @@ const DashboardScreen = ({ navigation }) => {
       {"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}
       </Text>
       
-        <CustomButton text= "Dashboard" onPress={() => navigation.navigate('Mood Diary')} type="moodButton"/>
+        <CustomButton text= "Dashboard" href='/' type="moodButton"/>
         <Text>
           {"\n"}
           
         </Text>
         
-        <CustomButton text= "Exercises" onPress={() => navigation.navigate('Choice')} type="exercisesButton"/>
+        <CustomButton text= "Exercises" href='/' type="exercisesButton"/>
         <Text>
           {"\n"}
           
         </Text>
         
-        <CustomButton text= "Daily Log" onPress={() => navigation.navigate('Awareness')} type="moodButton"/>
+        <CustomButton text= "Daily Log" href='/' type="moodButton"/>
         <Text>
           {"\n"}
           
         </Text>
         
-        <CustomButton text= "Emotion & Control" onPress={() => navigation.navigate('Emotion')} type="exercisesButton"/>
+        <CustomButton text= "Emotion & Control" href='/' type="exercisesButton"/>
     </View>
   );
 };

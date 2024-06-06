@@ -8,7 +8,7 @@ import Moment from 'moment';
 import DatePicker from 'react-native-date-picker'
 
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = () => {
 
   const {height} = useWindowDimensions();
   const [date, setDate] = useState(new Date())
@@ -63,7 +63,11 @@ const SettingsScreen = ({ navigation }) => {
     <View style={styles.root}>
     
        
-        <CustomButton text= "<" onPress={() => navigation.navigate('Menu Screen')} type="whiteBackButton"/>
+        <CustomButton 
+        text= "<" 
+        href='/' 
+        type="whiteBackButton"
+        />
         <Text style={styles.title}>
         Settings
       </Text>

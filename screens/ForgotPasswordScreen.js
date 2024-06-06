@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet,Alert, useWindowDimensions, ImageBackground, ScrollView, SafeAreaView, } from 'react-native';
+import {View, Text, Image, StyleSheet,Alert,ScrollView, SafeAreaView, } from 'react-native';
 
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
+
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
@@ -34,8 +35,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
     await auth().sendPasswordResetEmail(email);
     console.log('password reset sent');
     Alert.alert("Success ✅", "Email sent");
-    navigation.navigate("Home");
-    }catch (e){
+    window.location.href = "/";    
+  }catch (e){
       if(e.code ==='auth/invalid-email'){
         invalidEmailToast();
 
@@ -65,11 +66,20 @@ const ForgotPasswordScreen = ({ navigation }) => {
     <View style={styles.root }>
       
       <SafeAreaView>
-      <Image source={Logo} style={styles.logo} resizeMode="contain" />
-         </SafeAreaView>
+      <Image 
+      source={Logo}
+      style={styles.logo}
+      resizeMode="contain" 
+      />
+      </SafeAreaView>
          
 
-         <CustomButton text= "✖" onPress={() => navigation.navigate('Home')} type="QUINARY"/>
+         <CustomButton 
+         text= "✖" 
+         href='/' 
+         type="QUINARY"
+         />
+
       <Text style = {styles.title}>
         Forgot Password
         
@@ -91,7 +101,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
       />
       <Text>{"\n"}</Text>
    
-        <CustomButton text="Continue" onPress={()=>doReset(email)} type="continueFButton" />
+        <CustomButton 
+        text="Continue"
+        onPress={()=>doReset(email)}
+        type="continueFButton" />
+        
         <Text>{"\n"}</Text>
         
         <Toast />

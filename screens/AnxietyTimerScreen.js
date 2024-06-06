@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, Animated} from 'react-native';
 import Svg, {G, Path, Circle} from 'react-native-svg';
+import { useLocalSearchParams } from 'expo-router';
 
 import CustomButton from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Volume from '../../assets/images/Volume.png';
-import SignInBackground from '../../assets/images/waves_bg.jpg';
-import Cloud from '../../assets/gif/cloud.gif';
 import Waves from '../../assets/gif/waves3.gif';
 import Rain from '../../assets/gif/rain2.gif';
 import Fire from '../../assets/gif/fire.gif';
@@ -14,14 +13,14 @@ import Forest from '../../assets/gif/forest3.gif';
 import Meditation from '../../assets/gif/meditation3.gif';
 import Birds from '../../assets/gif/birds3.gif';
 
-const AnxietyTimerScreen = ({ route, navigation }) => {
+const AnxietyTimerScreen = ({ navigation }) => {
   const [timer, setTimer] = useState(0);
   const [backgroundImage, setBackgroundImage] = useState(null);
 
   const window = useWindowDimensions();
   const size = window.width-100;
 
-  const {music, cycle} = route.params;
+  const {music, cycle} = useLocalSearchParams();
 
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);
   const [pos, setPos] = useState(new Animated.ValueXY(0,0));
@@ -110,7 +109,7 @@ const AnxietyTimerScreen = ({ route, navigation }) => {
       <ImageBackground source={backgroundImage} style={styles.background}>
       <View style={styles.overlay} />
         <View style={styles.header}>
-          <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
+          <View style={{width: 100}}><CustomButton text= "<" href='/' type="blackBackButton"/></View>
           <Image source={Logo} style={styles.logo} resizeMode="cover" />
           <View style={{width: 100}}><Image source={Volume} style={styles.volume} resizeMode="cover" /></View>
         </View>

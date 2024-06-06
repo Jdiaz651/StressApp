@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, ScrollView} from 'react-native';
+import { Link } from 'expo-router'
+
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from '../../components/CustomInput';
 import SignInBackground from '../../assets/gif/SignInBackGround.gif';
@@ -17,7 +19,7 @@ const PolicyScreen = ({ navigation }) => {
           
       <Image source={Logo} style={styles.logo} resizeMode="contain" />
          
-          <CustomButton text= "✖" onPress={() => navigation.navigate('Sign Up')} type="QUINARY"/>
+          <CustomButton text= "✖" href='/' type="QUINARY"/>
           <Text style={styles.title}>
               Policy
           </Text>

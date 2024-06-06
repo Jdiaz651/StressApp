@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, Animated} from 'react-native';
 import Svg, {G, Path, Circle} from 'react-native-svg';
+import { Link } from 'expo-router'
 
-import CustomButton from '../../components/CustomButton';
+import CustomButton from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Volume from '../../assets/images/Volume.png';
 import SignInBackground from '../../assets/gif/SignInBackGround.gif';

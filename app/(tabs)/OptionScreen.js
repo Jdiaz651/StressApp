@@ -9,7 +9,7 @@ const OptionScreen = ({ navigation }) => {
   const window = useWindowDimensions();
   const {height} = useWindowDimensions();
   // this one i have added here
-  const CustomButton = ({ text, onPress, type, color }) => {
+  const CustomButton = ({ text, href, type, color }) => {
     const buttonStyle =
       type === 'blackBackButton'
         ? styles.blackBackButton
@@ -21,7 +21,7 @@ const OptionScreen = ({ navigation }) => {
         type === 'blackBackButton' ? styles.blackBackButtonText : type === 'smallSecondary' ? styles.smallButtonText : styles.buttonText;
         const buttonColor = color || '#457F9D'; 
     return (
-      <TouchableOpacity style={[buttonStyle, { backgroundColor: buttonColor }]} onPress={onPress}>
+      <TouchableOpacity style={[buttonStyle, { backgroundColor: buttonColor }]} href={href}>
         <Text style={[buttonTextStyle]}>{text}</Text>
       </TouchableOpacity>
     );
@@ -30,7 +30,7 @@ const OptionScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton" color="white" /></View>
+        <View style={{width: 100}}><CustomButton text= "<" href='/' type="blackBackButton" color="white" /></View>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -46,7 +46,7 @@ const OptionScreen = ({ navigation }) => {
       <View style={styles.buttonContainer}>
      <CustomButton
       text="Food for thought" 
-      onPress={() => navigation.navigate('FoodFT')}
+      href='/' 
       type="SECONDARY"
       color="#df7a84"
     />
@@ -54,7 +54,7 @@ const OptionScreen = ({ navigation }) => {
        
     <CustomButton
       text="Daily Log"
-      onPress={() => navigation.navigate('Daily Log')}
+      href='/'
       type="SECONDARY"
       color="#df7a84"
     />

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import {View, Button, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
+import { Link } from 'expo-router'
 
-import CustomButton from '../../components/CustomButton';
+import CustomButton from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Modal from "react-native-modal";
 
-const ChoiceScreen = ({ navigation }) => {
+const ChoiceScreen = () => {
   const window = useWindowDimensions();
 
     const [isModalVisible, setModalVisible] = useState(false);
@@ -18,8 +19,12 @@ const ChoiceScreen = ({ navigation }) => {
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="≡" onPress={() => navigation.navigate('Menu Screen')} type="blackBackButton" />
-        </View>
+        
+          <CustomButton 
+          text="≡" 
+          href="/"
+          type="blackBackButton" />
+            </View>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -31,12 +36,27 @@ const ChoiceScreen = ({ navigation }) => {
         What would you like to do?
       </Text>
 
-
-      <CustomButton text= "Immediate Exercises" onPress={() => navigation.navigate('Exercises')} type="CHOICE"/>
-      <CustomButton text="Daily Roadmap" onPress={() => navigation.navigate('Emotion')} type="CHOICE" />
-      <CustomButton text="Monthly Calendar" onPress={() => navigation.navigate('Mood Diary')} type="CHOICE" />
-      <CustomButton text="Dashboard" onPress={() => navigation.navigate('StressDataScreen')} type="CHOICE" />
-
+      
+      <CustomButton 
+      text= "Immediate Exercises"
+      href="/"  
+      type="CHOICE"/>
+      
+      <CustomButton 
+      text="Daily Roadmap" 
+      href="/"
+      type="CHOICE" />
+      
+      <CustomButton 
+      text="Monthly Calendar"
+      href="/"
+      type="CHOICE" />
+      
+      <CustomButton 
+      text="Dashboard"
+      href="/"
+      type="CHOICE" />
+      
       <View>
         <Modal isVisible={isModalVisible} onModalHide={() => setModalVisible(false)}>
           <View style={styles.modal}>
@@ -48,7 +68,9 @@ const ChoiceScreen = ({ navigation }) => {
             <Text style={styles.modalSmallText}>Daily stressors are day-to-day issues that cause stress and anxiety. Isolating them
               and focusing on what they are help us understand them better and reduce them. Writing them down helps us keep track of the
               things that cause us harm so we can work to eliminate them.</Text>
-            <Button style={styles.modalButton} title="Hide" onPress={toggleModal} />
+            <Button style={styles.modalButton} 
+            title="Hide" 
+            onPress={toggleModal} />
           </View>
         </Modal>
       </View>

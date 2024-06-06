@@ -1,6 +1,8 @@
 
 import React from 'react';
 import {View, TouchableOpacity, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, ImageBackground} from 'react-native';
+import { Link } from 'expo-router'
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
@@ -26,7 +28,7 @@ const ExercisesScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
+        <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton"/></View>
       </View>
 
       <Text style = {styles.title}>

@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, SafeAreaView, Text, Image, ImageBackground, StyleSheet, useWindowDimensions} from 'react-native';
+import { Link } from 'expo-router'
+
 import CustomButton from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Background1 from '../../assets/images/Background2.png';
@@ -11,7 +13,7 @@ const AwarenessMindScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
+        <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton"/></View>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />

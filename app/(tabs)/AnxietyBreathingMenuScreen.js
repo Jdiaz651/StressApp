@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, ImageBackground, Animated } from 'react-native';
 import { Link } from 'expo-router'
+
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';

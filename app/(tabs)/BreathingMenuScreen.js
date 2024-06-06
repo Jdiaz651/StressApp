@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, ImageBackground, Animated} from 'react-native';
+import { Link } from 'expo-router'
 
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
@@ -13,7 +14,7 @@ const BreathingMenuScreen = ({ route, navigation }) => {
        <ImageBackground source={NightSkyGif} style={styles.background}>
          <View style={styles.overlay} />
          <View style={styles.header}>
-           <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
+           <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton"/></View>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -48,7 +49,7 @@ const BreathingMenuScreen = ({ route, navigation }) => {
          </Text>
 
           <View style={styles.button}>
-                             <CustomButton text= "Next" onPress={() => navigation.navigate('Night Breathing Menu Screen')} type="SECONDARY"/>
+                             <CustomButton text= "Next" href='/' type="SECONDARY"/>
           </View>
 
        </ImageBackground>

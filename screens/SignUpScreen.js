@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions, Alert, KeyboardAvoidingView, ImageBackground, ScrollView, SafeAreaView, } from 'react-native';
+import { Link } from 'expo-router'
+
 import CheckBox from '@react-native-community/checkbox';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';

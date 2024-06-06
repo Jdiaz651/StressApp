@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity, SafeAreaView, Text, Image, ImageBackground, StyleSheet, useWindowDimensions} from 'react-native';
+import { Link } from 'expo-router'
 
 import CustomButton from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
@@ -9,7 +10,7 @@ const AwarenessScreen = ({ navigation }) => {
   const window = useWindowDimensions();
   const {height} = useWindowDimensions();
   // this one i have added here
-  const CustomButton = ({ text, onPress, type, color }) => {
+  const CustomButton = ({ text, href, type, color }) => {
     const buttonStyle =
       type === 'blackBackButton'
         ? styles.blackBackButton
@@ -21,7 +22,7 @@ const AwarenessScreen = ({ navigation }) => {
         type === 'blackBackButton' ? styles.blackBackButtonText : type === 'smallSecondary' ? styles.smallButtonText : styles.buttonText;
         const buttonColor = color || '#457F9D'; 
     return (
-      <TouchableOpacity style={[buttonStyle, { backgroundColor: buttonColor }]} onPress={onPress}>
+      <TouchableOpacity style={[buttonStyle, { backgroundColor: buttonColor }]} href={href}>
         <Text style={[buttonTextStyle]}>{text}</Text>
       </TouchableOpacity>
     );
@@ -30,7 +31,7 @@ const AwarenessScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton" color="white" /></View>
+        <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton" color="white" /></View>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -51,7 +52,7 @@ const AwarenessScreen = ({ navigation }) => {
       <View style={styles.buttonContainer}>
      <CustomButton
       text="Body"
-      onPress={() => navigation.navigate('Awareness Body')}
+      href="/"      
       type="SECONDARY"
       color="#df7a84"
     />
@@ -59,28 +60,28 @@ const AwarenessScreen = ({ navigation }) => {
        
     <CustomButton
       text="Mind"
-      onPress={() => navigation.navigate('Awareness Mind')}
+      href="/"      
       type="SECONDARY"
       color="#f8806f"
     />
 
     <CustomButton
       text="Feelings"
-      onPress={() => navigation.navigate('Awareness Feelings')}
+      href="/"
       type="SECONDARY"
       color="#d46766"
     />
       
       <CustomButton
       text="Behavior"
-      onPress={() => navigation.navigate('Awareness Behavior')}
+      href="/"      
       type="SECONDARY"
       color="#a44c5f"
     />
         </View>  
 
       <View style={styles.btcont}>
-        <CustomButton text= "Continue" onPress={() => navigation.navigate('Intention')} type="smallSecondary"/>
+        <CustomButton text= "Continue" href="/" type="smallSecondary"/>
       </View>
     </SafeAreaView>
   );

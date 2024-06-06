@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'expo-router'
 import {View, SafeAreaView, Text, Image, ImageBackground, StyleSheet, useWindowDimensions} from 'react-native';
+
 import CustomButton from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Background2 from '../../assets/images/Background2.png';

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, ScrollView } from 'react-native';
+import { Link } from 'expo-router'
 
 
 const HomeScreen = ({ navigation }) => {
@@ -9,7 +10,8 @@ const HomeScreen = ({ navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.root}>
-                <Text style={styles.title}>
+                <Text st
+                yle={styles.title}>
                     Home
                 </Text>
 

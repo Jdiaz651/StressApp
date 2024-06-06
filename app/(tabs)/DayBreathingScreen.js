@@ -2,19 +2,17 @@ import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, ImageBackground, Animated} from 'react-native';
 
 import CustomButton from '../../components/CustomButton';
-import CustomSelect from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
-import SignInBackGround from '../../assets/gif/NightSkyGif.gif';
 import movingSky from '../../assets/gif/movingsky.gif';
 
-const DayBreathingScreen = ({ route, navigation }) => {
+const DayBreathingScreen = ({ navigation }) => {
 
  return (
      <SafeAreaView style={styles.root}>
        <ImageBackground source={movingSky} style={styles.background}>
          <View style={styles.overlay} />
          <View style={styles.header}>
-           <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
+           <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton"/></View>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -50,7 +48,7 @@ const DayBreathingScreen = ({ route, navigation }) => {
 
 
           <View style={styles.button}>
-                             <CustomButton text= "Next" onPress={() => navigation.navigate('Breathing')} type="SECONDARY"/>
+                             <CustomButton text= "Next" href='/' type="SECONDARY"/>
           </View>
 
        </ImageBackground>
