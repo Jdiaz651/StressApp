@@ -1,26 +1,60 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Pressable} from 'react-native';
-import { Link } from 'expo-router'
+import {
+  StyleSheet,
+  Pressable,
+  GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
+import { Link } from 'expo-router';
 
 interface CustomButtonProps {
   text: string;
-  onPress?: () => {};
+  onPress?: (event: GestureResponderEvent) => void;
   type: string;
   href: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({text, onPress, type, href}) => {
+const CustomButton: React.FC<CustomButtonProps> = ({
+  text,
+  onPress = () => {},
+  type,
+  href,
+}) => {
+  const getPressableStyles = ({
+    pressed,
+  }: {
+    pressed: boolean;
+  }): StyleProp<ViewStyle> => {
+    const containerStyles = `container_${type}` as keyof typeof styles;
+    const pressedStyles = `pressed_${type}` as keyof typeof styles;
+    if (pressed) {
+      return [styles[containerStyles], styles[pressedStyles]];
+    } else {
+      return styles[containerStyles];
+    }
+  };
+
+  const getTextStyles = (type: string): StyleProp<TextStyle> => {
+    const textStyle = `text_${type}` as keyof typeof textStyles;
+    return textStyles[textStyle];
+  };
 
   return (
-    <Pressable onPress={onPress} style={({pressed}) => pressed ? [styles[`container_${type}`],styles[`pressed_${type}`]] : styles[`container_${type}`]}>
-      <Link href={href} style={styles.text, styles[`text_${type}`]}>{text}</Link>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => getPressableStyles({ pressed })}
+    >
+      <Link href={href} style={getTextStyles(type)}>
+        {text}
+      </Link>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  container_PRIMARY:{
+  container_PRIMARY: {
     backgroundColor: '#FFFFFF',
     width: 150,
     padding: 8.5,
@@ -28,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  container_SECONDARY:{
+  container_SECONDARY: {
     backgroundColor: '#457f9d',
     width: 150,
     padding: 8.5,
@@ -36,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  container_TERTIARY:{
+  container_TERTIARY: {
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
     width: 300,
     padding: 8.5,
@@ -44,18 +78,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  container_QUATERNARY:{
-    borderWidth:2,
+  container_QUATERNARY: {
+    borderWidth: 2,
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
-    borderColor:'#457F9D',
+    borderColor: '#457F9D',
     width: 150,
     padding: 8,
     marginVertical: -5,
     alignItems: 'center',
     borderRadius: 25,
   },
-  container_QUINARY:{
-    borderWidth:0,
+  container_QUINARY: {
+    borderWidth: 0,
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
     width: 50,
     padding: 8.5,
@@ -64,36 +98,35 @@ const styles = StyleSheet.create({
     marginTop: -100,
     borderRadius: 15,
   },
-  container_moodButton:{
-    
+  container_moodButton: {
     backgroundColor: '#457f9d',
     width: 380,
     padding: 18,
     alignSelf: 'center',
     borderRadius: 35,
   },
-  container_exercisesButton:{
+  container_exercisesButton: {
     backgroundColor: '#ec8e96',
     width: 380,
     padding: 18,
     alignSelf: 'center',
     borderRadius: 35,
   },
-  container_redButton:{
+  container_redButton: {
     backgroundColor: '#f27c7a',
     width: 350,
     padding: 18,
     alignSelf: 'center',
     borderRadius: 30,
   },
-  container_greenButton:{
+  container_greenButton: {
     backgroundColor: '#f27c7a',
     width: 350,
     padding: 18,
     alignSelf: 'center',
     borderRadius: 30,
   },
-  container_dropButton:{
+  container_dropButton: {
     width: 100,
     padding: 10,
     alignSelf: 'flex-start',
@@ -101,7 +134,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: -20,
   },
-  container_whiteBackButton:{
+  container_whiteBackButton: {
     width: 100,
     padding: 10,
     alignSelf: 'flex-start',
@@ -109,7 +142,7 @@ const styles = StyleSheet.create({
     marginVertical: -10,
     marginHorizontal: -20,
   },
-  container_blackBackButton:{
+  container_blackBackButton: {
     width: 100,
     padding: 10,
     alignSelf: 'flex-start',
@@ -117,7 +150,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: -20,
   },
-  container_logOutButton:{
+  container_logOutButton: {
     backgroundColor: '#FFFFFF',
     width: 500,
     padding: 5,
@@ -125,30 +158,28 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     marginVertical: 15,
     marginHorizontal: -20,
-  }, 
-  container_continueButton:{
-    borderWidth:2,
+  },
+  container_continueButton: {
+    borderWidth: 2,
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
-    borderColor:'#457F9D',
+    borderColor: '#457F9D',
     width: 150,
     padding: 8.5,
-    marginVertical: -5,
     alignItems: 'center',
     borderRadius: 25,
     marginVertical: 200,
   },
-  container_submitButton:{
-    borderWidth:2,
+  container_submitButton: {
+    borderWidth: 2,
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
-    borderColor:'#457F9D',
+    borderColor: '#457F9D',
     width: 150,
     padding: 8.5,
-    marginVertical: -5,
     alignItems: 'center',
     borderRadius: 25,
     marginVertical: 50,
   },
-  container_GOOGLE:{
+  container_GOOGLE: {
     backgroundColor: '#FFF',
     width: 300,
     padding: 8.5,
@@ -156,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  container_CHOICE:{
+  container_CHOICE: {
     backgroundColor: '#457F9D',
     width: 300,
     height: 100,
@@ -164,22 +195,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
-    
   },
-  container_INFO:{
-    borderColor: "#ADD8E6",
+  container_INFO: {
+    borderColor: '#ADD8E6',
     backgroundColor: 'white',
-    
     width: 155,
     height: 55,
-    
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
     borderRadius: 20,
-   
   },
-  container_STRESSOR:{
+  container_STRESSOR: {
     backgroundColor: '#457f9d',
     width: 150,
     height: 150,
@@ -187,7 +214,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 25,
   },
-  container_EXERCISE:{
+  container_EXERCISE: {
     backgroundColor: '#457f9d',
     width: 175,
     height: 175,
@@ -195,55 +222,49 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 25,
   },
-  container_continueFButton:{
-    borderWidth:2,
+  container_continueFButton: {
+    borderWidth: 2,
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
-    borderColor:'#457F9D',
+    borderColor: '#457F9D',
     width: 150,
     padding: 8.5,
     marginVertical: -5,
     alignItems: 'center',
     borderRadius: 25,
-   
   },
-  container_PLUS:{
+  container_PLUS: {
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
-    width: 150,
     padding: 8.5,
     marginVertical: 5,
     alignItems: 'center',
     borderRadius: 50,
-    width: '90%'
-
+    width: '90%',
   },
-  container_INFOSMALL:{
-    borderColor: "#f2a1a6",
+  container_INFOSMALL: {
+    borderColor: '#f2a1a6',
     backgroundColor: 'white',
-    
     width: 115,
     height: 45,
-    
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
     borderRadius: 20,
-   
-  },
-  
-  
-  pressed_PRIMARY:{
-    backgroundColor: '#457F9D',
-  },
-  pressed_SECONDARY:{
-    backgroundColor: '#457F9D',
-  },
-  pressed_GOOGLE:{
-    backgroundColor: "#EEE",
   },
 
+  pressed_PRIMARY: {
+    backgroundColor: '#457F9D',
+  },
+  pressed_SECONDARY: {
+    backgroundColor: '#457F9D',
+  },
+  pressed_GOOGLE: {
+    backgroundColor: '#EEE',
+  },
+});
 
-   text_PRIMARY:{
+const textStyles = StyleSheet.create({
+  text_PRIMARY: {
     fontWeight: 'bold',
     color: '#457F9D',
     fontSize: 24,
@@ -350,10 +371,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    
-    paddingBottom: 3
 
-  },text_PLUS:{
+    paddingBottom: 3,
+  },
+  text_PLUS: {
     fontWeight: 'bold',
     color: '#736468',
     fontSize: 24,
@@ -363,11 +384,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    
-    paddingBottom: 3
 
+    paddingBottom: 3,
   },
-  
-})
+});
 
 export default CustomButton;
