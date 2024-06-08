@@ -71,7 +71,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="AwarenessFeelingsScreen"
         options={{
-          title: 'Body Check',
+          title: 'Feelings Check',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),

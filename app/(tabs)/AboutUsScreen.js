@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, ScrollView} from 'react-native';
+import { Link } from 'expo-router'
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
@@ -12,7 +14,7 @@ const AboutUsScreen = ({ navigation }) => {
     <ScrollView showsVerticalScrollIndicator={false}>
     <View style={styles.root}>
       
-        <CustomButton text= "<" onPress={() => navigation.navigate('Menu Screen')} type="whiteBackButton"/>
+        <CustomButton text= "<" href="OptionScreen" type="whiteBackButton"/>
         <Text style={styles.title}>
         About Us
       </Text>
