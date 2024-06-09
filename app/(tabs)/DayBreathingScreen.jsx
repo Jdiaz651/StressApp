@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   SafeAreaView,
@@ -6,17 +7,19 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
+
 import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import Cloud from '../../assets/gif/cloud.gif';
+import movingSky from '../../assets/gif/movingsky.gif';
 
-const AnxietyBreathingMenuScreen = () => {
+const DayBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <ImageBackground source={Cloud} style={styles.background}>
+      <ImageBackground source={movingSky} style={styles.background}>
+        <View style={styles.overlay} />
         <View style={styles.header}>
           <View style={{ width: 100 }}>
-            <CustomButton text="<" type="blackBackButton" href="/" />
+            <CustomButton text="<" href="/" type="blackBackButton" />
           </View>
           <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
@@ -27,34 +30,39 @@ const AnxietyBreathingMenuScreen = () => {
           </View>
         </View>
 
-        <Text style={styles.title}>4-4-4 Focus Exercise</Text>
+        <Text style={styles.title}>4-4-4-4 Day Exercise</Text>
 
-        <Text style={styles.italic}>To help you focus.</Text>
+        <Text style={styles.italic}>To help you relax.</Text>
 
-        <Text style={styles.baseText}>
-          Pinch one nostril and breathe in through the other nostril for
-          <Text style={styles.italic}> 4</Text>
-          <Text style={styles.baseText}>seconds.</Text>
-        </Text>
+        <Text> {'\n\n'} </Text>
 
         <Text style={styles.baseText}>
-          Pinch both nostrils and hold your breathe for
+          Breathe in through your nose for{' '}
           <Text style={styles.italic}> 4 </Text>
           <Text style={styles.baseText}>
-            seconds.
+            {' '}
+            seconds.<Text>{'\n'}</Text>
           </Text>
         </Text>
 
         <Text style={styles.baseText}>
-          Release the other nostril and breathe out through that nostril for{' '}
-          <Text style={styles.italic}> 4 </Text>
+          Hold your breathe for <Text style={styles.italic}> 4 </Text>
           <Text style={styles.baseText}>
-            seconds.
+            {' '}
+            seconds.<Text>{'\n'}</Text>
+          </Text>
+        </Text>
+
+        <Text style={styles.baseText}>
+          Breathe out through mouth for <Text style={styles.italic}> 4 </Text>
+          <Text style={styles.baseText}>
+            {' '}
+            seconds.<Text>{'\n'}</Text>
           </Text>
         </Text>
 
         <View style={styles.button}>
-          <CustomButton href="AboutUsScreen" text="Next" type="SECONDARY" />
+          <CustomButton text="Next" href="/" type="SECONDARY" />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -67,7 +75,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,100,0,0.5)',
+    backgroundColor: 'rgba(25,45,100,0.5)',
   },
   background: {
     flex: 1,
@@ -94,7 +102,7 @@ const styles = StyleSheet.create({
   timer: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#ffffff',
     marginVertical: 50,
   },
   container: {
@@ -107,23 +115,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#ffffff',
     marginVertical: 5,
     textAlign: 'center',
   },
   baseText: {
     fontSize: 22,
     fontWeight: 'normal',
-    color: '#000000',
+    color: '#ffffff',
     marginVertical: 10,
-    textAlign: 'center',
-    paddingHorizontal: 15,
+    textAlign: 'left',
   },
   italic: {
     fontStyle: 'italic',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#ffffff',
     marginVertical: 10,
     textAlign: 'center',
   },
@@ -134,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnxietyBreathingMenuScreen;
+export default DayBreathingScreen;

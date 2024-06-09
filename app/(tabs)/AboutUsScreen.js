@@ -1,40 +1,24 @@
-import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, ScrollView} from 'react-native';
-import { Link } from 'expo-router'
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { CustomButton } from '../../components/CustomButton';
 
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-
-
-const AboutUsScreen = ({ navigation }) => {
-
-  const {height} = useWindowDimensions();
-
+const AboutUsScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-    <View style={styles.root}>
-      
-        <CustomButton text= "<" href="OptionScreen" type="whiteBackButton"/>
-        <Text style={styles.title}>
-        About Us
-      </Text>
-        
-
-
-        <Text style={styles.options}>
-            {"\n"}{"\n"}
-        </Text>
-
+      <View style={styles.root}>
+        <CustomButton text="<" href="OptionScreen" type="whiteBackButton" />
+        <Text style={styles.title}>About Us</Text>
         <Text style={styles.normal}>
-
-        HowRU is an innovative application designed to assist in the management of stress and anxiety.
-        The application offers a variety of features, including a daily mood diary, where you can document your emotional state through
-        responses to carefully curated questions. Furthermore, HowRU also provides immediate access to guided breathing exercises,
-        offering an effective solution for instant anxiety relief.
-        This multifaceted tool serves as your personalized ally in mental health maintenance and immediate stress reduction.
+          HowRU is an innovative application designed to assist in the
+          management of stress and anxiety. The application offers a variety of
+          features, including a daily mood diary, where you can document your
+          emotional state through responses to carefully curated questions.
+          Furthermore, HowRU also provides immediate access to guided breathing
+          exercises, offering an effective solution for instant anxiety relief.
+          This multifaceted tool serves as your personalized ally in mental
+          health maintenance and immediate stress reduction.
         </Text>
-    </View>
-
+      </View>
     </ScrollView>
   );
 };
@@ -44,9 +28,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 600,
     borderBottomColor: '#FFF7F5',
-    //backgroundColor :'#736467',
-    backgroundColor :'#457f9d',
-    justifyContent: 'center',  // add this line
+    backgroundColor: '#457f9d',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
@@ -57,13 +40,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   options: {
-      fontSize: 10,
-      color: 'white',
-      alignSelf: 'flex-end',
-      marginHorizontal: 30,
-      marginVertical: 5,
-      
-      
+    fontSize: 10,
+    color: 'white',
+    alignSelf: 'flex-end',
+    marginHorizontal: 30,
+    marginVertical: 5,
   },
   normal: {
     fontSize: 22,
@@ -72,13 +53,12 @@ const styles = StyleSheet.create({
     marginVertical: 45,
     textAlign: 'left',
     position: 'absolute',
-       borderWidth: 1, // set the border thickness
-        borderColor: 'black', // set the border color
-        backgroundColor: 'white', // set the background color of the box
-        padding: 10, // set the space between text and border
-        borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 15,
   },
-  
 });
 
 export default AboutUsScreen;

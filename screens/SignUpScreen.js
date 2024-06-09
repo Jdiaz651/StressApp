@@ -1,31 +1,38 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, useWindowDimensions, Alert, KeyboardAvoidingView, ImageBackground, ScrollView, SafeAreaView, } from 'react-native';
-import { Link } from 'expo-router'
-
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import CustomInput from '../components/CustomInput';
-import CustomButton from '../components/CustomButton';
+import { CustomInput } from '../components/CustomInput';
+import { CustomButton } from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 import firestore from '@react-native-firebase/firestore';
 
-var numberRegex = new RegExp("^(?=.*[0-9])");
-var specialCharacterRegex = new RegExp("^(?=.*[!@#$%^&*])");
-var lowercaseRegex = new RegExp("^(?=.*[a-z])");
-var uppercaseRegex = new RegExp("^(?=.*[A-Z])");
-var whitespaceRegex = new RegExp("^(?=.*[\\s])");
+var numberRegex = new RegExp('^(?=.*[0-9])');
+var specialCharacterRegex = new RegExp('^(?=.*[!@#$%^&*])');
+var lowercaseRegex = new RegExp('^(?=.*[a-z])');
+var uppercaseRegex = new RegExp('^(?=.*[A-Z])');
+var whitespaceRegex = new RegExp('^(?=.*[\\s])');
 
-const SignUpScreen = ({navigation}) => {
-  const {height} = useWindowDimensions();
+const SignUpScreen = ({ navigation }) => {
+  const { height } = useWindowDimensions();
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userCode, setUserCode] = useState('');
-  var db= firestore(); 
+  var db = firestore();
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleSecondCheckBox, setToggleSecondCheckBox] = useState(false);
@@ -101,38 +108,36 @@ const SignUpScreen = ({navigation}) => {
     });
   };
 
-
-
   const createUser = async (email, password) => {
     try {
       await auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
+        .then((userCredential) => {
           userCredential.user.sendEmailVerification();
           Alert.alert('✅', 'Please verify your email to log in!');
-          
+
           //Adds user and user info to firestore collection
           return db.collection('users').doc(userCredential.user.uid).set({
             email: email,
             displayName: name,
-            uid: userCredential.user.uid
-           })
-        })
+            uid: userCredential.user.uid,
+          });
+        });
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
         emailAlreadyInUseToast();
       }
       if (e.code === 'auth/invalid-email') {
-         invalidEmailToast();
+        invalidEmailToast();
       }
     }
   };
 
   //this authenticates the user
   const handleSignUp = () => {
-    createUser(email,password);
+    createUser(email, password);
   };
-    
+
   //function to only allow sign up if terms are ageed to
   const checkSignUp = () => {
     if (!toggleCheckBox || !toggleSecondCheckBox) {
@@ -155,142 +160,134 @@ const SignUpScreen = ({navigation}) => {
       Alert.alert('Password can not contain whitespace');
     } else if (email === '') {
       emptyEmailToast();
-    } else if(name === ''){
+    } else if (name === '') {
       noNameToast();
-    }
-    else {
+    } else {
       handleSignUp();
     }
   };
 
-
   return (
-    <KeyboardAvoidingView behavior='padding'style={ {height: height}}>
-    <ScrollView>
-      
-      <View style={styles.root}>
-      
-      <Image source={Logo} style={ {height: height * 0.15}} resizeMode="contain" />
-        <CustomButton
-          text="✖"
-          onPress={() => navigation.navigate('Home')}
-          type="QUINARY"
-        />
-        
-        <Text style={styles.title}>{'\n'}{'\n'}Sign Up</Text>
-
-        <Text style={styles.subTitle}>Please fill in the fields below</Text>
-
-        <CustomInput placeholder="Name" value={name} setValue={setName} />
-
-        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
-
-        <CustomInput
-          placeholder="Code (optional)"
-          value={userCode}
-          setValue={setUserCode}
-        />
-
-        <CustomInput
-          placeholder="Password"
-          value={password}
-          setValue={setPassword}
-          secureTextEntry
-        />
-
-        <CustomInput
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          setValue={setConfirmPassword}
-          secureTextEntry
-        />
-
-        <Text style={styles.parameters}>
-          •Must be 8 characters or longer {'\n'}
-          •Must be 20 characters or shorter {'\n'}
-          •Cannot have white spaces {'\n'}
-          •Must contain at least 1 uppercase character{'\n'}
-          •Must contain at least 1 lowercase character{'\n'}
-          •Must contain at least 1 numerical character {'\n'}
-          •Must contain at least 1 special character {'\n'}
-        </Text>
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            disabled={false}
-            value={toggleCheckBox}
-            onValueChange={newValue => setToggleCheckBox(newValue)}
+    <KeyboardAvoidingView behavior="padding" style={{ height: height }}>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={{ height: height * 0.15 }}
+            resizeMode="contain"
           />
-          <Text>
-            I confirm that I am least 18 years old
+          <CustomButton
+            text="✖"
+            onPress={() => navigation.navigate('Home')}
+            type="QUINARY"
+          />
+
+          <Text style={styles.title}>
+            {'\n'}
+            {'\n'}Sign Up
           </Text>
-        </View>
 
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            disabled={false}
-            value={toggleSecondCheckBox}
-            onValueChange={newValue => setToggleSecondCheckBox(newValue)}
+          <Text style={styles.subTitle}>Please fill in the fields below</Text>
+
+          <CustomInput placeholder="Name" value={name} setValue={setName} />
+
+          <CustomInput placeholder="Email" value={email} setValue={setEmail} />
+
+          <CustomInput
+            placeholder="Code (optional)"
+            value={userCode}
+            setValue={setUserCode}
           />
 
-          <Text>
-            I confirm that I have read and agreed to the terms of {''}
-            <Text
-              style={styles.link}
-              onPress={() => navigation.navigate('Policy')}>
-              policy {'\n'}
-              {'\n'}
+          <CustomInput
+            placeholder="Password"
+            value={password}
+            setValue={setPassword}
+            secureTextEntry
+          />
+
+          <CustomInput
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            setValue={setConfirmPassword}
+            secureTextEntry
+          />
+
+          <Text style={styles.parameters}>
+            •Must be 8 characters or longer {'\n'}
+            •Must be 20 characters or shorter {'\n'}
+            •Cannot have white spaces {'\n'}
+            •Must contain at least 1 uppercase character{'\n'}
+            •Must contain at least 1 lowercase character{'\n'}
+            •Must contain at least 1 numerical character {'\n'}
+            •Must contain at least 1 special character {'\n'}
+          </Text>
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              disabled={false}
+              value={toggleCheckBox}
+              onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            />
+            <Text>I confirm that I am least 18 years old</Text>
+          </View>
+
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              disabled={false}
+              value={toggleSecondCheckBox}
+              onValueChange={(newValue) => setToggleSecondCheckBox(newValue)}
+            />
+
+            <Text>
+              I confirm that I have read and agreed to the terms of {''}
+              <Text
+                style={styles.link}
+                onPress={() => navigation.navigate('Policy')}
+              >
+                policy {'\n'}
+                {'\n'}
+              </Text>
             </Text>
-          </Text>
+          </View>
+          <CustomButton
+            text="Sign Up"
+            onPress={() => {
+              checkSignUp();
+            }}
+            type="QUATERNARY"
+          />
+          <Text>{'\n'}</Text>
         </View>
-        <CustomButton text="Sign Up" onPress={() => {checkSignUp(); }} type="QUATERNARY"/>
-        <Text>{'\n'}</Text>
-
-        
-      </View>
-      
-     
       </ScrollView>
-      <Toast/>
-      
-      </KeyboardAvoidingView>
-    
-    
+      <Toast />
+    </KeyboardAvoidingView>
   );
 };
-
-
-
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#FFF7F5',
-    
   },
-  title : {
+  title: {
     fontSize: 38,
     fontWeight: 'bold',
     color: '#000000',
-    
   },
 
-  parameters : {
+  parameters: {
     fontSize: 14,
     color: '#736468',
-    
-    
   },
   logo: {
     maxWidth: 100,
     maxHeight: 100,
-   
   },
-  subTitle : {
+  subTitle: {
     fontSize: 17,
-    
+
     color: '#000000',
-    
   },
   link: {
     color: 'red',
@@ -298,22 +295,18 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignSelf: "baseline",
-    justifyContent: "center",
+    alignSelf: 'baseline',
+    justifyContent: 'center',
     flexDirection: 'row',
-    
   },
-  checkboxContainer:{
+  checkboxContainer: {
     flex: 1,
     alignSelf: 'flex-start',
-    justifyContent: "center",
+    justifyContent: 'center',
     flexDirection: 'row',
     marginHorizontal: 25,
   },
   //align self by doing the amrgin horizontal but get the width/2
-  
-
-  
 });
 
 export default SignUpScreen;

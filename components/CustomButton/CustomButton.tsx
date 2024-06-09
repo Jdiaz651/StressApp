@@ -13,7 +13,7 @@ interface CustomButtonProps {
   text: string;
   onPress?: (event: GestureResponderEvent) => void;
   type: string;
-  href: string;
+  href?: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -46,7 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onPress={onPress}
       style={({ pressed }) => getPressableStyles({ pressed })}
     >
-      <Link href={href} style={getTextStyles(type)}>
+      <Link href={href ? href : '/'} style={getTextStyles(type)}>
         {text}
       </Link>
     </Pressable>
@@ -389,4 +389,4 @@ const textStyles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export { CustomButton };

@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, TextInput, Button} from 'react-native';
-
-import CustomButton from '../components/CustomButton';
-import CustomSelect from '../components/CustomSelect';
-import CustomInput from '../components/CustomInput';
+import React, { useState } from 'react';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  Alert,
+  Button,
+} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import { CustomSelect } from '../components/CustomSelect';
+import { CustomInput } from '../components/CustomInput';
 import Logo from '../../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -12,39 +20,80 @@ import moment from 'moment';
 const ReasonsScreen = ({ route, navigation }) => {
   const [reasons, setReasons] = useState([]);
   const [reasonsCustom, setReasonsCustom] = useState('');
-
-  const window = useWindowDimensions();
-
-  const {stressor} = route.params;  
-  const user = auth().currentUser; 
-  
+  const { stressor } = route.params;
+  const user = auth().currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
 
   var db = firestore();
 
   const data = {
-    'work': ['Colleagues','Boss','Employees','Work Load','Culture','Toxic environment','Communication','Decision Making','Time Management','Dealing with Change'],
-    'home': ['Partner','Family','In laws','Children','Financial','Domestic duties','Sickness'],
-    'school': ['Homework','Making new friends','Exam pressure','Performance','Organization','Time management','Work/financial','Bullying'],
-    'social': ['Social Media','Bullying','Isolation','Traffic','Friends dispute','Sports performance','Organization','Climate Change','Economic Situation','War','Pandemic'],
+    work: [
+      'Colleagues',
+      'Boss',
+      'Employees',
+      'Work Load',
+      'Culture',
+      'Toxic environment',
+      'Communication',
+      'Decision Making',
+      'Time Management',
+      'Dealing with Change',
+    ],
+    home: [
+      'Partner',
+      'Family',
+      'In laws',
+      'Children',
+      'Financial',
+      'Domestic duties',
+      'Sickness',
+    ],
+    school: [
+      'Homework',
+      'Making new friends',
+      'Exam pressure',
+      'Performance',
+      'Organization',
+      'Time management',
+      'Work/financial',
+      'Bullying',
+    ],
+    social: [
+      'Social Media',
+      'Bullying',
+      'Isolation',
+      'Traffic',
+      'Friends dispute',
+      'Sports performance',
+      'Organization',
+      'Climate Change',
+      'Economic Situation',
+      'War',
+      'Pandemic',
+    ],
     '': [],
   };
 
   const handlePress = () => {
-    if(reasons.length < 1) Alert.alert('Please pick a reason');
-    else{
-      const stressorsDoc = db.collection('stressors').doc(user.uid).collection('dates').doc(myDate).set({
-        stressor : stressor,
-        reasons : reasons
-      })
+    if (reasons.length < 1) Alert.alert('Please pick a reason');
+    else {
+      const stressorsDoc = db
+        .collection('stressors')
+        .doc(user.uid)
+        .collection('dates')
+        .doc(myDate)
+        .set({
+          stressor: stressor,
+          reasons: reasons,
+        });
       navigation.navigate('Awareness');
-    } 
+    }
   };
 
-  const handleAdd = () =>{
-    if (reasonsCustom !== ''){
-      setReasons([...reasons,reasonsCustom]);
+  const handleAdd = () => {
+    if (reasonsCustom !== '') {
+      setReasons([...reasons, reasonsCustom]);
       setReasonsCustom('');
     }
   };
@@ -52,27 +101,43 @@ const ReasonsScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.goBack()} type="blackBackButton"/></View>
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-         <View style={{ marginRight: 100 }}>
+        <View style={{ width: 100 }}>
+          <CustomButton
+            text="<"
+            onPress={() => navigation.goBack()}
+            type="blackBackButton"
+          />
+        </View>
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
-            </View>
-            </View>
+          </View>
+        </View>
       </View>
 
-      <Text style = {styles.title}>
-        What are your {stressor} stressors?
-      </Text>
+      <Text style={styles.title}>What are your {stressor} stressors?</Text>
 
-      <CustomSelect data={data[stressor]} onSelect={(value) => setReasons(value)} type="SECONDARY"/>
+      <CustomSelect
+        data={data[stressor]}
+        onSelect={(value) => setReasons(value)}
+        type="SECONDARY"
+      />
       <CustomInput
-        value={reasonsCustom} setValue={setReasonsCustom} placeholder="Add Custom Reasons"
-      />      
+        value={reasonsCustom}
+        setValue={setReasonsCustom}
+        placeholder="Add Custom Reasons"
+      />
 
-      <Button color = '#F2A1A6' title="Add" onPress={handleAdd}/>
+      <Button color="#F2A1A6" title="Add" onPress={handleAdd} />
 
       <View style={styles.button}>
-        <CustomButton text= "Continue" onPress={() => handlePress()} type="SECONDARY"/>
+        <CustomButton
+          text="Continue"
+          onPress={() => handlePress()}
+          type="SECONDARY"
+        />
       </View>
     </SafeAreaView>
   );
@@ -84,7 +149,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF7F5',
   },
-  header:{
+  header: {
     width: '100%',
     height: 100,
     flexDirection: 'row',
@@ -96,7 +161,7 @@ const styles = StyleSheet.create({
     maxHeight: 75,
     marginVertical: 10,
   },
-  volume:{
+  volume: {
     width: 30,
     height: 30,
     margin: 20,
@@ -109,9 +174,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     textAlign: 'center',
   },
-  button:{
+  button: {
     flex: 1,
-    flexDirection: "column-reverse",
+    flexDirection: 'column-reverse',
     paddingBottom: 10,
   },
 });

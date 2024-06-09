@@ -1,51 +1,59 @@
 import React from 'react';
-import { Link } from 'expo-router'
-import {View, SafeAreaView, Text, Image, ImageBackground, StyleSheet, useWindowDimensions} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native';
 
-import CustomButton from '../../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Background2 from '../../assets/images/Background2.png';
 
-
-const AwarenessFeelingsScreen = ({ navigation }) => {
-  const window = useWindowDimensions();
-  const {height} = useWindowDimensions();
+const AwarenessFeelingsScreen = () => {
+  const { height } = useWindowDimensions();
 
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
-        <View style={{width: 100}}><CustomButton text= "<" href="/" type="blackBackButton"/></View>
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-         <View style={{ marginRight: 100 }}>
+        <View style={{ width: 100 }}>
+          <CustomButton text="<" href="/" type="blackBackButton" />
+        </View>
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <View style={{ marginRight: 100 }}>
             <Image source={Logo} style={styles.logo} resizeMode="cover" />
-            </View>
-            </View>
+          </View>
+        </View>
       </View>
-      <Text style = {styles.title}>
-      <Text style={{fontWeight: "bold"}}> Feelings </Text>
+      <Text style={styles.title}>
+        <Text style={{ fontWeight: 'bold' }}> Feelings </Text>
       </Text>
 
-
       <View style={styles.container}>
-<Image source={Background2} style={styles.container, {height: height *0.65}} resizeMode="contain" />
-<View style={styles.viewQuadText}>
-  <Text style={styles.quadText}>
-    <Text style ={styles.title}>{'\n This may look like:' }  </Text>
-    <Text>
-
-    {'\n'}
-    {'\n•Alienation \n'}
-    {'•Apathy \n'}
-    {'•Depression\n'}
-    {'•Fear  \n'}
-    {'•Irritability \n'}
-    {'•Loss of confidence \n'}
-    
-    </Text>
-    </Text>
-</View>
-</View>
-
+        <Image
+          source={Background2}
+          style={(styles.container, { height: height * 0.65 })}
+          resizeMode="contain"
+        />
+        <View style={styles.viewQuadText}>
+          <Text style={styles.quadText}>
+            <Text style={styles.title}>{'\n This may look like:'} </Text>
+            <Text>
+              {'\n'}
+              {'\n•Alienation \n'}
+              {'•Apathy \n'}
+              {'•Depression\n'}
+              {'•Fear  \n'}
+              {'•Irritability \n'}
+              {'•Loss of confidence \n'}
+            </Text>
+          </Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -61,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF7F5',
   },
-  header:{
+  header: {
     width: '100%',
     height: 100,
     flexDirection: 'row',
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
     maxHeight: 75,
     marginVertical: 10,
   },
-  volume:{
+  volume: {
     width: 30,
     height: 30,
     margin: 20,
@@ -86,10 +94,10 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     textAlign: 'center',
   },
-  row:{
+  row: {
     width: '100%',
     marginVertical: 10,
-    flexDirection: "row",
+    flexDirection: 'row',
     justifyContent: 'space-around',
   },
   normal: {
@@ -112,8 +120,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   viewQuadText: {
-  position: 'absolute',
-},
+    position: 'absolute',
+  },
 });
 
 export default AwarenessFeelingsScreen;
