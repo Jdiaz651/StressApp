@@ -4,6 +4,7 @@ import {
   Pressable,
   GestureResponderEvent,
   StyleProp,
+  Text,
   ViewStyle,
   TextStyle,
 } from 'react-native';
@@ -46,9 +47,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onPress={onPress}
       style={({ pressed }) => getPressableStyles({ pressed })}
     >
-      <Link href={href ? href : '/'} style={getTextStyles(type)}>
-        {text}
-      </Link>
+      {href ? (
+        <Link href={href} style={getTextStyles(type)}>
+          {text}
+        </Link>
+      ) : (
+        <Text>{text}</Text>
+      )}
     </Pressable>
   );
 };
