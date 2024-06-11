@@ -9,29 +9,29 @@ import {
   ImageBackground,
   Animated,
 } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import Svg, { G, Path, Circle } from 'react-native-svg';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Volume from '../../assets/images/Volume.png';
-import Waves from '../../assets/gif/waves3.gif';
-import Rain from '../../assets/gif/rain2.gif';
-import Fire from '../../assets/gif/fire.gif';
-import Forest from '../../assets/gif/forest3.gif';
-import Meditation from '../../assets/gif/meditation3.gif';
-import Birds from '../../assets/gif/birds3.gif';
+import WavesImage from '../../assets/gif/waves3.gif';
+import RainImage from '../../assets/gif/rain2.gif';
+import FireImage from '../../assets/gif/fire.gif';
+import ForestImage from '../../assets/gif/forest3.gif';
+import MeditationImage from '../../assets/gif/meditation3.gif';
+import BirdsImage from '../../assets/gif/birds3.gif';
 
-const TimerScreen = ({ route, navigation }) => {
+const TimerScreen = () => {
+  // Get route with parameters
+  const route = useRoute();
+  const { music, cycle } = route.params;
   const [timer, setTimer] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState();
+  const [pos, setPos] = useState(new Animated.ValueXY(0, 0));
 
   const window = useWindowDimensions();
   const size = window.width - 100;
-
-  const { music, cycle } = route.params;
-
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-  const [pos, setPos] = useState(new Animated.ValueXY(0, 0));
-  //DESTRESS YOUR DAY
   const min = Math.floor(timer / 60);
   const sec = timer % 60 < 10 ? '0' + (timer % 60).toString() : timer % 60;
   const stage = Math.ceil(timer / 4) % 4;
@@ -75,37 +75,47 @@ const TimerScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    if (music === 'Waves') {
-      setBackgroundImage(Waves);
-    } else if (music === 'Rain') {
-      setBackgroundImage(Rain);
-    } else if (music === 'Fire') {
-      setBackgroundImage(Fire);
-    } else if (music === 'Forest') {
-      setBackgroundImage(Forest);
-    } else if (music === 'Meditation') {
-      setBackgroundImage(Meditation);
-    } else if (music === 'Birds') {
-      setBackgroundImage(Birds);
-    }
+    const setBackground = () => {
+      console.log(backgroundImage)
+      switch (music) {
+        case 'Waves':
+          setBackgroundImage(WavesImage);
+          break;
+        case 'Rain':
+          setBackgroundImage(RainImage);
+          break;
+        case 'Fire':
+          setBackgroundImage(FireImage);
+          break;
+        case 'Forest':
+          setBackgroundImage(ForestImage);
+          break;
+        case 'Meditation':
+          setBackgroundImage(MeditationImage);
+          break;
+        case 'Birds':
+          setBackgroundImage(BirdsImage);
+          break;
+      }
+    };
 
+    setBackground();
     pos.x.resetAnimation();
     pos.y.resetAnimation();
     animation();
     setTimer(16 * cycle);
-    var counter = 0;
-    var countdown = setInterval(() => {
+
+    const countdown = setInterval(() => {
       setTimer((lastTimer) => {
-        lastTimer <= 1 && clearInterval(countdown);
+        if (lastTimer <= 1) {
+          clearInterval(countdown);
+          pos.stopAnimation();
+          navigation.navigate('BreathingScreen');
+        }
         return lastTimer - 1;
       });
-      counter++;
-      if (counter == 16 * cycle) {
-        clearInterval(countdown);
-        pos.stopAnimation();
-        navigation.navigate('Exercises');
-      }
     }, 1000);
+
     return () => clearInterval(countdown);
   }, []);
 

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { CustomButton } from '../../components/CustomButton';
 import { CustomSelect } from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
@@ -15,6 +16,7 @@ import { Audio } from 'expo-av';
 const BreathingScreen = () => {
   const [music, setMusic] = useState('');
   const [cycle, setCycle] = useState(0);
+  const navigation = useNavigation();
   let soundLength = 0;
   const musicData = ['Rain', 'Waves', 'Fire', 'Forest', 'Meditation', 'Birds'];
   const cycleData = [1, 2, 3, 5, 10];
@@ -77,6 +79,7 @@ const BreathingScreen = () => {
     }
 
     if (soundFile) {
+      navigation.navigate('TimerScreen', {music: music, cycle: cycle});
       await playSound(`../../assets/sounds/${soundFile}`, cycle);
     }
   };
