@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Svg, { G, Path, Circle } from 'react-native-svg';
 import { useLocalSearchParams } from 'expo-router';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Volume from '../../assets/images/Volume.png';
 import Waves from '../../assets/gif/waves3.gif';

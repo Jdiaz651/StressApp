@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Svg, { G, Path, Circle } from 'react-native-svg';
-import { CustomButton } from '../../components/CustomButton';
+import { CustomButton } from '../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Volume from '../../assets/images/Volume.png';
 import WavesImage from '../../assets/gif/waves3.gif';
@@ -20,6 +20,7 @@ import FireImage from '../../assets/gif/fire.gif';
 import ForestImage from '../../assets/gif/forest3.gif';
 import MeditationImage from '../../assets/gif/meditation3.gif';
 import BirdsImage from '../../assets/gif/birds3.gif';
+import { useNavigation } from 'expo-router';
 
 const TimerScreen = () => {
   // Get route with parameters
@@ -28,7 +29,7 @@ const TimerScreen = () => {
   const [timer, setTimer] = useState(0);
   const [backgroundImage, setBackgroundImage] = useState();
   const [pos, setPos] = useState(new Animated.ValueXY(0, 0));
-
+  const navigation = useNavigation();
   const window = useWindowDimensions();
   const size = window.width - 100;
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);

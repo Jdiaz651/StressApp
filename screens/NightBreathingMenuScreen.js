@@ -8,18 +8,21 @@ import {
   useWindowDimensions,
   Alert,
 } from 'react-native';
-
-import CustomButton from '../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
+import {CustomButton} from '../components/CustomButton';
 import { CustomSelect } from '../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
-var Sound = require('react-native-sound');
+import { Audio } from 'expo-av';
 
-const NightBreathingMenuScreen = ({ navigation }) => {
-  const [music, setMusic] = useState(null);
-  const [cycle, setCycle] = useState(null);
+const NightBreathingMenuScreen = () => {
+  const [music, setMusic] = useState('');
+  const [cycle, setCycle] = useState(0);
+  const navigation = useNavigation();
+  let soundLength = 0;
   const musicData = ['Rain', 'Waves', 'Fire', 'Forest', 'Meditation', 'Birds'];
-  const cycleData = ['1', '2', '3', '5', '10'];
+  const cycleData = [1, 2, 3, 5, 10];
 
+/* Code before Expo port
   Sound.setCategory('Playback');
   var gentle_waves = new Sound(
     'gentle_waves_sleep.mp3',
@@ -523,8 +526,74 @@ const NightBreathingMenuScreen = ({ navigation }) => {
       }
     }
   };
+*/
+  
+const handlePress = async (music, cycle) => {
+  async function playSound(filePath, cycles) {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(filePath);
 
-  return (
+    console.log('Playing Sound');
+    for (let i = 0; i < cycles; i++) {
+      try {
+        await sound.setPositionAsync(0);
+        await sound.playAsync().then(function (result) {
+          soundLength = result.durationMillis;
+        });
+        const durationInSeconds = soundLength;
+        await new Promise((resolve) =>
+          setTimeout(resolve, durationInSeconds)
+        );
+      } catch (error) {
+        console.error('Error playing sound:', error);
+      }
+    }
+  }
+
+  if (!music) {
+    Alert.alert('Please pick a music choice');
+    return;
+  }
+
+  if (!cycle) {
+    Alert.alert('Please select the number of cycles');
+    return;
+  }
+
+  let soundFile = '';
+  switch (music[0]) {
+    case 'Waves':
+      soundFile = 'explosion_3.mp3';
+      break;
+    case 'Rain':
+      soundFile = 'explosion_3.mp3';
+      break;
+    case 'Fire':
+      soundFile = 'explosion_3.mp3';
+      break;
+    case 'Forest':
+      soundFile = 'explosion_3.mp3';
+      break;
+    case 'Meditation':
+      soundFile = 'explosion_3.mp3';
+      break;
+    case 'Birds':
+      soundFile = 'explosion_3.mp3';
+      break;
+    default:
+      console.log('Invalid music choice');
+      return;
+  }
+
+  if (soundFile) {
+    const pagePath = window.location.href;
+    
+    navigation.navigate('TimerScreen', {music: music, cycle: cycle, reference:pagePath});
+    await playSound(`../../assets/sounds/${soundFile}`, cycle);
+  }
+};
+
+return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
@@ -564,7 +633,8 @@ const NightBreathingMenuScreen = ({ navigation }) => {
       <View style={styles.button}>
         <CustomButton
           text="Start"
-          onPress={() => handlePress()}
+          href=""
+          onPress={() => handlePress(music, cycle)}
           type="SECONDARY"
         />
       </View>

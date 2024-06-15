@@ -19,7 +19,7 @@ const BreathingMenuScreen = () => {
         <View style={styles.overlay} />
         <View style={styles.header}>
           <View style={{ width: 100 }}>
-            <CustomButton text="<" href="/" type="blackBackButton" />
+            <CustomButton text="<" href="ExercisesScreen" type="whiteBackButton" />
           </View>
           <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}

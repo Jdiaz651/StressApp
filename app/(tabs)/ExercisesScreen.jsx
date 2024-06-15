@@ -5,15 +5,17 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { useNavigation } from 'expo-router';
 import { CustomButton } from '../../components/CustomButton';
 
 const ExercisesScreen = () => {
- 
+ const navigation = useNavigation();
+
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="<" href="/" type="blackBackButton" />
+          <CustomButton text="<" href='..' type="blackBackButton" />
         </View>
       </View>
 
@@ -22,19 +24,19 @@ const ExercisesScreen = () => {
 
       <CustomButton
         text="Destress Your Day"
-        onPress={() => navigation.navigate('Day Breathing Screen')}
+        href="DayBreathingScreen"
         type="EXERCISE"
       />
 
       <CustomButton
         text="Ease Your Sleep"
-        onPress={() => navigation.navigate('Breathing Menu Screen')}
+        href= "BreathingMenuScreen"
         type="EXERCISE"
       />
 
       <CustomButton
         text="Strengthen Your Focus"
-        onPress={() => navigation.navigate('Anxiety Breathing Menu Screen')}
+        href='AnxietyBreathingMenuScreen'
         type="EXERCISE"
       />
     </SafeAreaView>
