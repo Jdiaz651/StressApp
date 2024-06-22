@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 import Logo from '../../assets/images/Logo.png';
 
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { auth, db } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { doc, getDoc, collection } from 'firebase/firestore';
 
 const MoodDiaryScreen = ({ navigation }) => {
   const [foodFTData, setFoodData] = useState([]);
@@ -14,9 +14,7 @@ const MoodDiaryScreen = ({ navigation }) => {
   const [indexD, setIndexD] = useState(0);
   const [index, setIndex] = useState(0);
 
-  const user = auth().currentUser;
-  var db = firestore();
-
+  const user = auth.currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
 
@@ -28,19 +26,13 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function stressorsData(date) {
     try {
-      const response = await db
-        .collection('stressors')
-        .doc(user.uid)
-        .collection('dates')
-        .doc(date)
-        .get();
-      const data = response.data(); // Get the data object from the response
-
-      // Check if the data exists before updating the state
+      const docRef = doc(collection(db, 'stressors', user.uid, 'dates'), date);
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
       if (data) {
-        setStressorData([data]); // Set the 'stressorData' state as an array with the data object
+        setStressorData([data]);
       } else {
-        setStressorData([]); // Data is empty, set an empty array
+        setStressorData([]);
       }
     } catch (error) {
       console.log(error);
@@ -49,14 +41,10 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function foodData(date) {
     try {
-      const foodFTDoc = await db
-        .collection('FoodFT')
-        .doc(user.uid)
-        .collection('dates')
-        .doc(date)
-        .get();
+      const docRef = doc(collection(db, 'FoodFT', user.uid, 'dates'), date);
+      const docSnap = await getDoc(docRef);
       const tempData = [];
-      tempData.push(foodFTDoc.data());
+      tempData.push(docSnap.data());
       setFoodData(tempData);
     } catch (error) {
       console.log(error);
@@ -65,14 +53,10 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function dailyData(date) {
     try {
-      const dailyLogDoc = await db
-        .collection('DailyLog')
-        .doc(user.uid)
-        .collection('dates')
-        .doc(date)
-        .get();
+      const docRef = doc(collection(db, 'DailyLog', user.uid, 'dates'), date);
+      const docSnap = await getDoc(docRef);
       const tempData = [];
-      tempData.push(dailyLogDoc.data());
+      tempData.push(docSnap.data());
       setDailyData(tempData);
     } catch (error) {
       console.log(error);
@@ -143,77 +127,6 @@ const MoodDiaryScreen = ({ navigation }) => {
   };
 
   return (
-    //     Original Screen Code:
-    //     <ScrollView style={styles.root}>
-    //          <View style={styles.header}>
-    //            <View style={styles.button}><CustomButton text= "<" onPress={() => navigation.navigate('Choice')} type="dropButton"/></View>
-    //            <Text style={styles.title}>
-    //              Mood Diary
-    //            </Text>
-    //          </View>
-    //
-    //          <View style={styles.container}>
-    //          <CalendarStrip
-    //           style={{ height: 100, paddingTop: 10, paddingBottom: 10 }}
-    //           onDateSelected={day => {
-    //           const selectedDate = moment(day).format('YYYY-MM-DD'); // Format the date as 'YYYY-MM-DD'
-    //           foodData(selectedDate);
-    //           stressorsData(selectedDate);
-    //          dailyData(selectedDate);
-    //          }}
-    //        />
-    //          </View>
-    //
-    //          <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 20 }}>
-    //      <ScrollView style={{ backgroundColor: '#c9d6df', borderRadius: 10, padding: 20 }}>
-    //        {stressorData.map((item) => (
-    //          <View style={{ marginBottom: 10 }}>
-    //            <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf: 'center' }}>Stressors for the Day</Text>
-    //            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Your stressor for the day was {item.stressor}</Text>
-    //            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Your selected reasons were: {item.reasons}</Text>
-    //          </View>
-    //        ))}
-    //      </ScrollView>
-    //    </View>
-    //
-    //    <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 20 }}>
-    //      <View style={{ backgroundColor: '#7bb4c8', borderRadius: 10, padding: 20 }}>
-    //        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-    //          <CustomButton onPress={handleLeftArrowPress} type="arrow" text="<" style={{ alignSelf: 'center' }} />
-    //          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Questions of the Day</Text>
-    //          <CustomButton onPress={handleRightArrowPress} type="arrow" text=">" style={{ alignSelf: 'center'}} />
-    //        </View>
-    //        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{data[index]?.label}: {data[index]?.value}</Text>
-    //      </View>
-    //    </View>
-    //
-    //    <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
-    //      <View style={{ backgroundColor: '#457f9d', borderRadius: 10, padding: 20 }}>
-    //        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-    //          <CustomButton onPress={handleLeftArrowPressDaily} type="arrow" text="<" style={{ alignSelf: 'center' }} />
-    //          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Daily Log Data</Text>
-    //          <CustomButton onPress={handleRightArrowPressDaily} type="arrow" text=">" style={{ alignSelf: 'center' }} />
-    //        </View>
-    //        <View style={{ height: 40}}>
-    //          <View style={{ marginBottom: 5 }}>
-    //            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{fields[indexD]?.label}: {fields[indexD]?.value}</Text>
-    //            <Text style={{ marginTop: 15 }}>{dailyLogData[indexD]?.reasons}</Text>
-    //          </View>
-    //        </View>
-    //      </View>
-    //    </View>
-    //    <View style={styles.buttonWrapper}>
-    //    <CustomButton text= "Continue" onPress={() => navigation.navigate('OptionScreen')} type="SECONDARY"/>
-    //          </View>
-    //        <View style={styles.stressorView}>
-    //              <CustomButton text= "View Stress Data" onPress={() => navigation.navigate('StressDataScreen')} type="SECONDARY"/>
-    //              </View>
-    //        </ScrollView>
-
-    //The line of code below can be inserted into line 208 to access daily log data
-
-    //         <View style={{width: 100}}><CustomButton text= "<" onPress={() => navigation.navigate('Data Screen')} type="blackBackButton"/></View>
-
     <View style={styles.root}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>

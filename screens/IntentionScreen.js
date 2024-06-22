@@ -9,10 +9,9 @@ import {
   Animated,
 } from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import { db, auth } from '../../FirebaseConfig'; // Adjust the path as necessary
 import moment from 'moment';
 
 const IntentionScreen = ({ navigation }) => {
@@ -20,8 +19,7 @@ const IntentionScreen = ({ navigation }) => {
   const [prev, setPrev] = useState(0);
   const window = useWindowDimensions();
   const size = window.width - 40;
-  const user = auth().currentUser;
-  var db = firestore();
+  const user = auth.currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
   const AnimatedG = Animated.createAnimatedComponent(G);
@@ -63,7 +61,6 @@ const IntentionScreen = ({ navigation }) => {
       console.log(error);
     }
   };
-
   const backgroundStyle = {
     backgroundColor: color.interpolate({
       inputRange: prev < value ? [prev, value] : [value, prev],

@@ -10,8 +10,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import CustomInput from '../components/CustomInput';
-import { CustomButton } from '../components/CustomButton';
+import CustomInput from '../../components/CustomInput';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';

@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
 
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import { auth, db } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 
 const EmotionScreen = ({ navigation }) => {
@@ -23,9 +23,7 @@ const EmotionScreen = ({ navigation }) => {
   const window = useWindowDimensions();
   const size = window.width - 40;
 
-  const user = auth().currentUser;
-  var db = firestore();
-
+  const user = auth.currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
 
@@ -105,7 +103,7 @@ const EmotionScreen = ({ navigation }) => {
           }),
   };
 
-  const handle = (number) => {
+  const handle = async (number) => {
     setValue(number);
     Animated.parallel([
       Animated.timing(angle, {
@@ -119,15 +117,14 @@ const EmotionScreen = ({ navigation }) => {
         useNativeDriver: false,
       }),
     ]).start();
-    const feelingDoc = db
-      .collection('DailyLog')
-      .doc(user.uid)
-      .collection('dates')
-      .doc(myDate)
-      .set({
-        feeling: value,
+    try {
+      await setDoc(doc(db, 'DailyLog', user.uid, 'dates', myDate), {
+        feeling: number,
       });
-    setPrev(value);
+    } catch (error) {
+      console.log('Error writing document: ', error);
+    }
+    setPrev(number);
   };
 
   return (

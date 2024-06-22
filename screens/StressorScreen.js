@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, SafeAreaView, Text, Image, StyleSheet } from 'react-native';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 
 const StressorScreen = ({ navigation }) => {

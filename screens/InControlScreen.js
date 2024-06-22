@@ -9,17 +9,15 @@ import {
   Animated,
 } from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import { db, auth } from '../../FirebaseConfig'; // Adjust the path as necessary
 import moment from 'moment';
 
 const InControlScreen = ({ navigation }) => {
   const [value, setValue] = useState(0);
   const [prev, setPrev] = useState(0);
-  const user = auth().currentUser;
-  var db = firestore();
+  const user = auth.currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
   const window = useWindowDimensions();
@@ -44,6 +42,7 @@ const InControlScreen = ({ navigation }) => {
     '#B2F075',
     '#75F075',
   ];
+
   const handlePress = async () => {
     try {
       await db
@@ -59,6 +58,7 @@ const InControlScreen = ({ navigation }) => {
       console.log(error);
     }
   };
+
   const backgroundStyle = {
     backgroundColor: color.interpolate({
       inputRange: prev < value ? [prev, value] : [value, prev],
@@ -68,6 +68,7 @@ const InControlScreen = ({ navigation }) => {
           : [colorsBG[value], colorsBG[prev]],
     }),
   };
+
   const rotationStyle = {
     transform: [
       { translateX: 50 },
@@ -82,9 +83,10 @@ const InControlScreen = ({ navigation }) => {
       { translateY: -30 },
     ],
   };
+
   const textStyle = {
     color:
-      prev == 0
+      prev === 0
         ? colors[value]
         : color.interpolate({
             inputRange: prev < value ? [prev, value] : [value, prev],
@@ -94,7 +96,7 @@ const InControlScreen = ({ navigation }) => {
                 : [colors[value], colors[prev]],
           }),
     opacity:
-      prev != 0
+      prev !== 0
         ? 1
         : color.interpolate({
             inputRange: [0, value],

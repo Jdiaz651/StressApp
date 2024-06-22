@@ -9,8 +9,8 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {CustomButton} from '../components/CustomButton';
-import { CustomSelect } from '../components/CustomSelect';
+import {CustomButton} from '../../components/CustomButton';
+import { CustomSelect } from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
 import { Audio } from 'expo-av';
 
@@ -588,7 +588,7 @@ const handlePress = async (music, cycle) => {
   if (soundFile) {
     const pagePath = window.location.href;
     
-    navigation.navigate('TimerScreen', {music: music, cycle: cycle, reference:pagePath});
+    navigation.navigate('NightTimerScreen', {music: music, cycle: cycle, reference:pagePath});
     await playSound(`../../assets/sounds/${soundFile}`, cycle);
   }
 };
