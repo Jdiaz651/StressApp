@@ -11,7 +11,7 @@ import {
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
 import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import { db, auth } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { auth, db } from '../../firebase'; // Adjust the path as necessary
 import moment from 'moment';
 
 const InControlScreen = ({ navigation }) => {

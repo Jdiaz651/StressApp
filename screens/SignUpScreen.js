@@ -1,23 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  Alert,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import {  View,  Text,  Image,  StyleSheet,  useWindowDimensions,  Alert,  KeyboardAvoidingView,  ScrollView,} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { CustomInput } from '../components/CustomInput';
 import { CustomButton } from '../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import { auth, db } from '../FirebaseConfig'; // Adjust the path as necessary
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import Logo from '../assets/images/Logo.png';
+//import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
+//import firestore from '@react-native-firebase/firestore';
 
 var numberRegex = new RegExp('^(?=.*[0-9])');
 var specialCharacterRegex = new RegExp('^(?=.*[!@#$%^&*])');
@@ -33,6 +23,7 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userCode, setUserCode] = useState('');
+  //var db = firestore();
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleSecondCheckBox, setToggleSecondCheckBox] = useState(false);
@@ -110,16 +101,19 @@ const SignUpScreen = ({ navigation }) => {
 
   const createUser = async (email, password) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await sendEmailVerification(userCredential.user);
-      Alert.alert('✅', 'Please verify your email to log in!');
+      await auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          userCredential.user.sendEmailVerification();
+          Alert.alert('✅', 'Please verify your email to log in!');
 
-      // Adds user and user info to firestore collection
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
-        email: email,
-        displayName: name,
-        uid: userCredential.user.uid,
-      });
+          //Adds user and user info to firestore collection
+          return db.collection('users').doc(userCredential.user.uid).set({
+            email: email,
+            displayName: name,
+            uid: userCredential.user.uid,
+          });
+        });
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
         emailAlreadyInUseToast();
@@ -130,16 +124,16 @@ const SignUpScreen = ({ navigation }) => {
     }
   };
 
-  // This authenticates the user
+  //this authenticates the user
   const handleSignUp = () => {
     createUser(email, password);
   };
 
-  // Function to only allow sign up if terms are agreed to
+  //function to only allow sign up if terms are ageed to
   const checkSignUp = () => {
     if (!toggleCheckBox || !toggleSecondCheckBox) {
       checkBoxesToast();
-    } else if (password !== confirmPassword) {
+    } else if (password != confirmPassword) {
       matchingPasswordToast();
     } else if (password.length < 8) {
       shortPasswordToast();
@@ -154,7 +148,7 @@ const SignUpScreen = ({ navigation }) => {
     } else if (!uppercaseRegex.test(password)) {
       uppercaseToast();
     } else if (whitespaceRegex.test(password)) {
-      Alert.alert('Password cannot contain whitespace');
+      Alert.alert('Password can not contain whitespace');
     } else if (email === '') {
       emptyEmailToast();
     } else if (name === '') {
@@ -190,7 +184,11 @@ const SignUpScreen = ({ navigation }) => {
 
           <CustomInput placeholder="Email" value={email} setValue={setEmail} />
 
-          <CustomInput placeholder="Code (optional)" value={userCode} setValue={setUserCode} />
+          <CustomInput
+            placeholder="Code (optional)"
+            value={userCode}
+            setValue={setUserCode}
+          />
 
           <CustomInput
             placeholder="Password"
@@ -279,6 +277,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 17,
+
     color: '#000000',
   },
   link: {

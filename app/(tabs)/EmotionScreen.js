@@ -12,7 +12,7 @@ import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
 
 import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import { auth, db } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { auth, db } from '../../firebase';  // Adjust the path as necessary
 import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 

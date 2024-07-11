@@ -11,7 +11,7 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import { db, auth } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { auth, db } from '../../firebase';  // Adjust the path as necessary
 import moment from 'moment';
 
 const FoodFTScreen = ({ navigation }) => {

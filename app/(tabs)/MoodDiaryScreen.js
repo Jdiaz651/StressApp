@@ -5,7 +5,7 @@ import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 import Logo from '../../assets/images/Logo.png';
 
-import { auth, db } from '../../FirebaseConfig'; // Adjust the path as necessary
+import { auth, db } from '../../firebase'; // Adjust the path as necessary
 import { doc, getDoc, collection } from 'firebase/firestore';
 
 const MoodDiaryScreen = ({ navigation }) => {

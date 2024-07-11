@@ -1,12 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
 
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBURFKffQa4KtCJMqXdAyjzTFhO6BUzxks",
     authDomain: "stress-and-anxiety1.firebaseapp.com",
-    databaseURL: "https://stress-and-anxiety1-default-rtdb.firebaseio.com",
+    databaseURL: "https://stress-and-anxiety1-default-rtdb.firebaseio.com/",
     projectId: "stress-and-anxiety1",
     storageBucket: "stress-and-anxiety1.appspot.com",
     messagingSenderId: "867873321843",
@@ -16,6 +16,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const firestore = getFirestore(app);
 
-export { app, auth, db };
+export { app, auth, firestore, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, getDoc, setDoc, doc};
