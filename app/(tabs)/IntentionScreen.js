@@ -9,21 +9,19 @@ import {
   Animated,
 } from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import { auth, db } from '../../firebase';  // Adjust the path as necessary
 import moment from 'moment';
 
-const InControlScreen = ({ navigation }) => {
+const IntentionScreen = ({ navigation }) => {
   const [value, setValue] = useState(0);
   const [prev, setPrev] = useState(0);
-  const user = auth().currentUser;
-  var db = firestore();
-  const today = new Date();
-  const myDate = moment(today).format('YYYY-MM-DD');
   const window = useWindowDimensions();
   const size = window.width - 40;
+  const user = auth.currentUser;
+  const today = new Date();
+  const myDate = moment(today).format('YYYY-MM-DD');
   const AnimatedG = Animated.createAnimatedComponent(G);
   const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
   const [color, setColor] = useState(new Animated.Value(0));
@@ -44,6 +42,7 @@ const InControlScreen = ({ navigation }) => {
     '#B2F075',
     '#75F075',
   ];
+
   const handlePress = async () => {
     try {
       await db
@@ -51,10 +50,13 @@ const InControlScreen = ({ navigation }) => {
         .doc(user.uid)
         .collection('dates')
         .doc(myDate)
-        .set({
-          InControl: value,
-        });
-      navigation.navigate('Stressor');
+        .set(
+          {
+            Intention: value,
+          },
+          { merge: true }
+        );
+      navigation.navigate('OptionScreen');
     } catch (error) {
       console.log(error);
     }
@@ -68,6 +70,7 @@ const InControlScreen = ({ navigation }) => {
           : [colorsBG[value], colorsBG[prev]],
     }),
   };
+
   const rotationStyle = {
     transform: [
       { translateX: 50 },
@@ -82,6 +85,7 @@ const InControlScreen = ({ navigation }) => {
       { translateY: -30 },
     ],
   };
+
   const textStyle = {
     color:
       prev == 0
@@ -139,9 +143,9 @@ const InControlScreen = ({ navigation }) => {
       </View>
 
       <Text style={styles.title}>
-        How in control
+        Intention
         {'\n'}
-        are you?
+        to change
       </Text>
 
       <Svg height={size / 2 + size / 20} width={size} style={styles.slider}>
@@ -244,4 +248,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InControlScreen;
+export default IntentionScreen;

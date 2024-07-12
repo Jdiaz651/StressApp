@@ -1,3 +1,4 @@
+// StressDataScreen.js
 import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
@@ -9,8 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { LineChart, PieChart, BarChart } from 'react-native-chart-kit';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { firebase } from '../FirebaseConfig'; 
 import Logo from '../../assets/images/Logo.png';
 import { CustomButton } from '../components/CustomButton';
 
@@ -19,8 +19,8 @@ const StressDataScreen = ({ navigation }) => {
   const [data, setData] = useState(null);
   const [dataInControlAndChange, setDataInControlAndChange] = useState(null);
 
-  const user = auth().currentUser;
-  var db = firestore();
+  const user = firebase.auth().currentUser;
+  const db = firebase.firestore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,6 +103,7 @@ const StressDataScreen = ({ navigation }) => {
       },
     ],
   };
+
 
   const feelings = {
     data: Object.values(data)

@@ -16,7 +16,7 @@ const AnxietyBreathingMenuScreen = () => {
       <ImageBackground source={Cloud} style={styles.background}>
         <View style={styles.header}>
           <View style={{ width: 100 }}>
-            <CustomButton text="<" type="blackBackButton" href="/" />
+            <CustomButton text="<" type="blackBackButton" href="ExercisesScreen" />
           </View>
           <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}

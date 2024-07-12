@@ -1,29 +1,21 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Alert,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-  ToastAndroid,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, Alert, StyleSheet, useWindowDimensions, ImageBackground, ToastAndroid, SafeAreaView, TouchableOpacity} from 'react-native';
+//import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { auth, signOut } from '../firebase.js';
+import { firestore, getDoc, doc } from '../firebase.js';
+import { CustomButton } from '../components/CustomButton/index';
+import { useNavigation } from '@react-navigation/core'
 import Toast from 'react-native-toast-message';
-import auth from '@react-native-firebase/auth';
-import { CustomButton } from '../components/CustomButton';
-import notifications from '../../assets/MenuScreen/bell.png';
-import home from '../../assets/MenuScreen/home.png';
-import logout from '../../assets/MenuScreen/logout.png';
-import profile from '../../assets/MenuScreen/profile.png';
-import settings from '../../assets/MenuScreen/settings.png';
-import about from '../../assets/MenuScreen/about.png';
-import help from '../../assets/MenuScreen/help.png';
-import new_lake from '../../assets/MenuScreen/new_lake.png';
+import notifications from '../assets/MenuScreen/bell.png';
+import home from '../assets/MenuScreen/home.png';
+import logout from '../assets/MenuScreen/logout.png';
+import profile from '../assets/MenuScreen/profile.png';
+import settings from '../assets/MenuScreen/settings.png';
+import about from '../assets/MenuScreen/about.png';
+import help from '../assets/MenuScreen/help.png';
+import new_lake from '../assets/MenuScreen/new_lake.png';
 
+/*
 const signOutGoogle = async (navigation) => {
   Alert.alert('Log Out', 'Are you sure you want to log out?', [
     {
@@ -60,11 +52,44 @@ const signOutGoogle = async (navigation) => {
 const showToastAndroid = () => {
   ToastAndroid.show('LOGGED OUT', ToastAndroid.SHORT);
 };
+*/
 
-const MenuScreen = ({ navigation }) => {
+
+const ProfilePage = () => {
+  
   const { height } = useWindowDimensions();
-  const user = auth().currentUser;
-  const [currentTab, setCurrentTab] = useState('Home');
+  const [currentTab, setCurrentTab] = useState('Home') ;
+  const navigation = useNavigation()
+  const [userData, setUserData] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUserEmail(user.email);
+        const docRef = doc(firestore, 'users', user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserData(docSnap.data());
+        } else {
+          console.log('No such document!');
+        }
+      } else {
+        setUserEmail(null);
+        setUserData(null);
+      }
+    });
+
+    return unsubscribe; // Cleanup subscription on unmount
+  }, []);
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      navigation.navigate("LoginScreen")
+    })
+    .catch(error => alert(error.message))
+  }
 
   const TabButton = (currentTab, setCurrentTab, title, image, navigation) => {
     return (
@@ -86,7 +111,8 @@ const MenuScreen = ({ navigation }) => {
               navigation.navigate('Help');
               break;
             case 'LogOut':
-              signOutGoogle(navigation);
+              handleSignOut();
+              
 
               break;
             default:
@@ -128,6 +154,8 @@ const MenuScreen = ({ navigation }) => {
         </View>
       </TouchableOpacity>
     );
+
+    
   };
 
   return (
@@ -161,7 +189,8 @@ const MenuScreen = ({ navigation }) => {
               marginTop: 10,
             }}
           >
-            {user.email}{' '}
+            <Text>Email: {userEmail || '(email)'} {'\n'}</Text>
+            <Text>Welcome back, {userData?.displayName || '(user)'}!</Text>
           </Text>
         </ImageBackground>
 
@@ -200,4 +229,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuScreen;
+export default ProfilePage;

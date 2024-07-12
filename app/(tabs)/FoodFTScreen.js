@@ -9,10 +9,9 @@ import {
   Alert,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { auth, db } from '../../firebase';  // Adjust the path as necessary
 import moment from 'moment';
 
 const FoodFTScreen = ({ navigation }) => {
@@ -93,8 +92,7 @@ const FoodFTScreen = ({ navigation }) => {
     'Why are you feeling this level of stress and anxiety?',
   ];
 
-  const user = auth().currentUser;
-  var db = firestore();
+  const user = auth.currentUser;
 
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
@@ -106,8 +104,7 @@ const FoodFTScreen = ({ navigation }) => {
     else if (!when) Alert.alert('Please pick a when question');
     else if (!why) Alert.alert('Please pick a why question');
     else {
-      const foodFTDoc = db
-        .collection('FoodFT')
+      db.collection('FoodFT')
         .doc(user.uid)
         .collection('dates')
         .doc(myDate)
@@ -117,8 +114,13 @@ const FoodFTScreen = ({ navigation }) => {
           where: whereData[where],
           when: whenData[when],
           why: whyData[why],
+        })
+        .then(() => {
+          navigation.navigate('Mood Diary');
+        })
+        .catch((error) => {
+          console.error('Error writing document: ', error);
         });
-      navigation.navigate('Mood Diary');
     }
   };
 

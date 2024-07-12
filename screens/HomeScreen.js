@@ -1,5 +1,8 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+
 import React, { useState } from 'react';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+//import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import {
   View,
   Text,
@@ -13,17 +16,18 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Logo from '../../assets/images/Logo.png';
-import { CustomInput } from '../components/CustomInput';
-import { CustomButton } from '../components/CustomButton';
+import { CustomInput } from '../../components/CustomInput';
+import { CustomButton } from '../../components/CustomButton';
 import SignInBackground from '../../assets/gif/SignInBackGround.gif';
 //import database from '@react-native-firebase/database';
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
 
 const HomeScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { height } = useWindowDimensions();
 
+/*
   GoogleSignin.configure({
     webClientId:
       '14011892852-nkn2h4900prc2kgg6nvubu10p0mscc51.apps.googleusercontent.com',
@@ -34,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
       const { idToken } = await GoogleSignin.signIn();
 
       // Create a Google credential with the token
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      //const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
       // Sign-in the user with the credential
       const userSignIn = auth().signInWithCredential(googleCredential);
@@ -99,7 +103,7 @@ const HomeScreen = ({ navigation }) => {
     ToastAndroid.show('SIGNED IN', ToastAndroid.SHORT);
   };
   //this checks if the user is already logged in or not, if they are, takes them to dashboard
-  auth().onAuthStateChanged((user) => {
+  /*auth().onAuthStateChanged((user) => {
     try {
       if (user && user.emailVerified) {
         navigation.navigate('Choice');
@@ -193,7 +197,7 @@ const HomeScreen = ({ navigation }) => {
         <CustomButton
           text="Google"
           onPress={() => {
-            signInGoogleUser();
+            //signInGoogleUser();
           }}
           type="GOOGLE"
         />
@@ -240,3 +244,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+*/

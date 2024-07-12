@@ -79,7 +79,9 @@ const BreathingScreen = () => {
     }
 
     if (soundFile) {
-      navigation.navigate('TimerScreen', {music: music, cycle: cycle});
+      const pagePath = window.location.href;
+      
+      navigation.navigate('TimerScreen', {music: music, cycle: cycle, reference:pagePath});
       await playSound(`../../assets/sounds/${soundFile}`, cycle);
     }
   };

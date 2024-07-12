@@ -1,23 +1,16 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-  ScrollView,
-  SafeAreaView,
-} from 'react-native';
-
+import {View, Text, Image, StyleSheet, Alert, ScrollView,SafeAreaView,} from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import CustomInput from '../components/CustomInput';
 import { CustomButton } from '../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
+import Logo from '../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
+  const navigation = useNavigation() 
 
   const invalidEmailToast = () => {
     Toast.show({
@@ -65,7 +58,7 @@ const ForgotPasswordScreen = () => {
           <Image source={Logo} style={styles.logo} resizeMode="contain" />
         </SafeAreaView>
 
-        <CustomButton text="✖" href="/" type="QUINARY" />
+        <CustomButton text="✖" type="QUINARY"  onPress={() => navigation.navigate("LoginScreen")}/>
 
         <Text style={styles.title}>Forgot Password</Text>
         <Text style={styles.subTitle}>

@@ -1,22 +1,18 @@
 /* eslint-disable prettier/prettier */
+
+/* This file is no longer being used.
+  It is only here for archival purposes.
+
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  Alert,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import {  View,  Text,  Image,  StyleSheet,  useWindowDimensions,  Alert,  KeyboardAvoidingView,  ScrollView,} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { CustomInput } from '../components/CustomInput';
 import { CustomButton } from '../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import auth from '@react-native-firebase/auth';
+import Logo from '../assets/images/Logo.png';
+//import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
-import firestore from '@react-native-firebase/firestore';
+//import firestore from '@react-native-firebase/firestore';
 
 var numberRegex = new RegExp('^(?=.*[0-9])');
 var specialCharacterRegex = new RegExp('^(?=.*[!@#$%^&*])');
@@ -32,7 +28,7 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userCode, setUserCode] = useState('');
-  var db = firestore();
+  //var db = firestore();
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleSecondCheckBox, setToggleSecondCheckBox] = useState(false);
@@ -310,3 +306,4 @@ const styles = StyleSheet.create({
 });
 
 export default SignUpScreen;
+*/
