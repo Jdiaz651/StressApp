@@ -1,3 +1,8 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+
+
+
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, ScrollView} from 'react-native';
 import CustomInput from '../../components/CustomInput';
@@ -75,3 +80,4 @@ const styles = StyleSheet.create({
 });
 
 export default AccountScreen;
+*/

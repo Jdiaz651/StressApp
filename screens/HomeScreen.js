@@ -1,3 +1,6 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+
 import React, { useState } from 'react';
 //import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import {
@@ -148,7 +151,7 @@ const HomeScreen = ({ navigation }) => {
         //console.error("Too many requests");
       }
     }
-  };*/
+  };
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -241,3 +244,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+*/
