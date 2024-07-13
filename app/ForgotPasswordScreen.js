@@ -58,7 +58,7 @@ const ForgotPasswordScreen = () => {
           <Image source={Logo} style={styles.logo} resizeMode="contain" />
         </SafeAreaView>
 
-        <CustomButton text="✖" type="QUINARY"  onPress={() => navigation.navigate("LoginScreen")}/>
+        <CustomButton text="✖" href="LoginScreen" type="QUINARY"  />
 
         <Text style={styles.title}>Forgot Password</Text>
         <Text style={styles.subTitle}>

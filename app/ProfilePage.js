@@ -14,7 +14,10 @@ import settings from '../assets/MenuScreen/settings.png';
 import about from '../assets/MenuScreen/about.png';
 import help from '../assets/MenuScreen/help.png';
 import new_lake from '../assets/MenuScreen/new_lake.png';
+import { StatusBar } from 'react-native';
+import { Stack } from "expo-router";
 
+// Google Sign in/ Sign up currently not implemented
 /*
 const signOutGoogle = async (navigation) => {
   Alert.alert('Log Out', 'Are you sure you want to log out?', [
@@ -97,18 +100,19 @@ const ProfilePage = () => {
         onPress={() => {
           switch (title) {
             case 'Home':
-              navigation.navigate('Choice');
+              navigation.navigate('HomeScreen');
               break;
             case 'Settings':
+              navigation.navigate('SettingsScreen');
               break;
             case 'Notifications':
-              navigation.navigate('Notifications');
+              navigation.navigate('NotificationScreen');
               break;
             case 'About':
-              navigation.navigate('About Us');
+              navigation.navigate('AboutUsScreen');
               break;
             case 'Help':
-              navigation.navigate('Help');
+              navigation.navigate('HelpScreen');
               break;
             case 'LogOut':
               handleSignOut();
@@ -160,24 +164,26 @@ const ProfilePage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden />
+      <Stack.Screen options={{ header: () => null }} />
       <View style={{ justifyContent: 'flex-start', padding: 0, flex: 1 }}>
         <ImageBackground
           source={new_lake}
-          style={{ padding: 10, width: 500, height: 230 }}
+          style={{ padding: 10, width: 500, height: 300 }}
         >
           <CustomButton
             text="<"
-            onPress={() => navigation.navigate('Choice')}
-            type="whiteBackButton"
+            href="HomeScreen"
+            type="blackBackButton"
           />
           <Image
             source={profile}
             style={{
-              width: 90,
-              height: 90,
-              borderRadius: 40,
+              width: 100,
+              height: 100,
+              borderRadius: 50,
               marginLeft: 5,
-              marginTop: 10,
+              marginTop: 5,
             }}
           ></Image>
           <Text
@@ -186,7 +192,10 @@ const ProfilePage = () => {
               fontSize: 22,
               fontWeight: 'bold',
               color: 'white',
-              marginTop: 10,
+              marginTop: 7,
+              textShadowColor: 'rgba(0, 0, 0, 0.75)',
+              textShadowOffset: {width: -1, height: 1},
+              textShadowRadius: 5,
             }}
           >
             <Text>Email: {userEmail || '(email)'} {'\n'}</Text>
@@ -196,20 +205,8 @@ const ProfilePage = () => {
 
         <View style={{ flexGrow: 1, marginTop: 10 }}>
           {TabButton(currentTab, setCurrentTab, 'Home', home, navigation)}
-          {TabButton(
-            currentTab,
-            setCurrentTab,
-            'Settings',
-            settings,
-            navigation
-          )}
-          {TabButton(
-            currentTab,
-            setCurrentTab,
-            'Notifications',
-            notifications,
-            navigation
-          )}
+          {TabButton(currentTab, setCurrentTab, 'Settings', settings, navigation)}
+          {TabButton(currentTab, setCurrentTab, 'Notifications', notifications, navigation)}
           {TabButton(currentTab, setCurrentTab, 'About', about, navigation)}
           {TabButton(currentTab, setCurrentTab, 'Help', help, navigation)}
           {TabButton(currentTab, setCurrentTab, 'LogOut', logout, navigation)}

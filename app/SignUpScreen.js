@@ -24,10 +24,14 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  
+  //Not Used
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userCode, setUserCode] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleSecondCheckBox, setToggleSecondCheckBox] = useState(false);
+  //
+
   const navigation = useNavigation()
 
   useEffect(() => {
@@ -57,6 +61,7 @@ const SignUpScreen = () => {
     .catch(error => alert(error.message))
   }
 
+  // TODO: Add the following passwords checks when creating a new account. Currently not implemented
   const emptyEmailToast = () => {
     Toast.show({
       type: 'error',
@@ -113,8 +118,8 @@ const SignUpScreen = () => {
       text2: 'Please check the boxes',
     });
   };
-
-  // Not used because it break the page
+  
+  // Not used because it breaks the page
   const checkSignUp = () => {
     if (!toggleCheckBox || !toggleSecondCheckBox) {
       checkBoxesToast();

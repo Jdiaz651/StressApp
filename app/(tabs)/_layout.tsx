@@ -39,30 +39,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="AboutUsScreen"
-        options={{
-          title: 'About Us',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'home' : 'home-outline'}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="AnxietyBreathingMenuScreen"
-        options={{
-          title: 'Breathing Menu',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'home' : 'home-outline'}
-              color={color}
-            />
-          ),
-        }}
-      />
+
       <Tabs.Screen
         name="AwarenessBehaviorScreen"
         options={{

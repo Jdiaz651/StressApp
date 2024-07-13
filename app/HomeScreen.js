@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Button,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
+import {View, Button, SafeAreaView, Text, Image, StyleSheet,} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
 import Modal from 'react-native-modal';
 
 const ChoiceScreen = () => {
@@ -21,7 +14,7 @@ const ChoiceScreen = () => {
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="≡" href="/" type="blackBackButton" />
+          <CustomButton text="≡" href="ProfilePage" type="blackBackButton" />
         </View>
         <View
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
