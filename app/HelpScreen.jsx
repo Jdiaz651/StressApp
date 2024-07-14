@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
+import { CustomButton } from '../components/CustomButton';
 
 const HelpScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <CustomButton text="<" href="/" type="whiteBackButton" />
+        <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
         <Text style={styles.title}>Help</Text>
 
         <Text style={styles.options}>

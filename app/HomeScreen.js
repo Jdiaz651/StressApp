@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Button,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
+import {View, Button, SafeAreaView, Text, Image, StyleSheet,} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
 import Modal from 'react-native-modal';
 
 const ChoiceScreen = () => {
@@ -21,7 +14,7 @@ const ChoiceScreen = () => {
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="≡" href="/" type="blackBackButton" />
+          <CustomButton text="≡" href="ProfilePage" type="blackBackButton" />
         </View>
         <View
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
@@ -34,13 +27,13 @@ const ChoiceScreen = () => {
 
       <Text style={styles.title}>What would you like to do?</Text>
 
-      <CustomButton text="Immediate Exercises" href="/" type="CHOICE" />
+      <CustomButton text="Dashboard" href="/" type="CHOICE" />
 
-      <CustomButton text="Daily Roadmap" href="/" type="CHOICE" />
+      <CustomButton text="Immediate Excercises" href="/" type="CHOICE" />
+
+      <CustomButton text="Daily Roadmap" href="EmotionScreen" type="CHOICE" />
 
       <CustomButton text="Monthly Calendar" href="/" type="CHOICE" />
-
-      <CustomButton text="Dashboard" href="/" type="CHOICE" />
 
       <View>
         <Modal
@@ -127,7 +120,7 @@ const styles = StyleSheet.create({
   modalSmallText: {
     flex: 1,
     color: 'white',
-    fontSize: 15,
+    fontSize: 18,
     padding: 10,
     textAlign: 'center',
   },

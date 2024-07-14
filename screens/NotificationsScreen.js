@@ -1,11 +1,11 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+  PS: This file is very similar to SettingsScreen in screens
+-------------------------------------------------------------------------------------------------
+
+
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  useWindowDimensions,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet, useWindowDimensions, ScrollView, } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
 import Toast from 'react-native-toast-message';
 import PushNotification from 'react-native-push-notification';
@@ -30,7 +30,7 @@ const SettingsScreen = ({ navigation }) => {
       date: new Date(newDate), // Sends notification at the specified time.
       allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
 
-      /* Android Only */
+      // Android Only 
       repeatType: 'day',
       repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
     });
@@ -126,3 +126,4 @@ const styles = StyleSheet.create({
 });
 
 export default SettingsScreen;
+*/

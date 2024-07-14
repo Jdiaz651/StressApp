@@ -1,32 +1,23 @@
-/* This file is no longer being used.
-  It is only here for archival purposes.
-  PS: This file is very similar to NotificationsScreen in screens
--------------------------------------------------------------------------------------------------
-
-
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, ScrollView,} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
 import Toast from 'react-native-toast-message';
 import PushNotification from 'react-native-push-notification';
-import DatePicker from 'react-native-date-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const SettingsScreen = () => {
+const NotificationScreen = () => {
   const [date, setDate] = useState(new Date());
-  var newDate = new Date(date);
-  // Notifications only work for the Android version. Missing some requirements for iOS notifications
-  //Sends a notification daily based on users specified time
+  const [show, setShow] = useState(false);
+
   const scheduleNotification = () => {
     PushNotification.localNotificationSchedule({
       channelId: 'my-channel',
-      title: 'Daily Reminder', // optional
-      message: "Hello! Don't forget to fill out your daily entries.", // required
-      date: new Date(newDate), // Sends notification at the specified time.
-      allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
-
-      // Android Only 
+      title: 'Daily Reminder',
+      message: "Hello! Don't forget to fill out your daily entries.",
+      date: new Date(date),
+      allowWhileIdle: true,
       repeatType: 'day',
-      repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
+      repeatTime: 1,
     });
     Toast.show({
       type: 'success',
@@ -36,10 +27,8 @@ const SettingsScreen = () => {
     });
   };
 
-  //Closes all notifications and ends any scheduled notifications
   const closeNotification = () => {
     PushNotification.cancelAllLocalNotifications();
-    PushNotification.cancelLocalNotification('my-channel');
     Toast.show({
       type: 'success',
       text1: 'All notifications cleared',
@@ -48,40 +37,54 @@ const SettingsScreen = () => {
     });
   };
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(false);
+    setDate(currentDate);
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <CustomButton text="<" href="/" type="whiteBackButton" />
-        <Text style={styles.title}>Settings</Text>
-
+        <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
+        <Text style={styles.title}>Notifications</Text>
         <View style={styles.top} />
-
         <Text style={styles.options}>
           {'\n'}
           {'\n'}
         </Text>
       </View>
 
-      <Text style={styles.options}>
-        <DatePicker
-          date={date}
-          onDateChange={setDate}
+      <Text style={styles.subtitle}>
+          {'\n'}
+          {'\n'}
+        </Text>
+      <CustomButton
+        text="Select Time"
+        onPress={() => setShow(true)}
+        type="greenButton"
+      />
+      {show && (
+        <DateTimePicker
+          value={date}
           mode="time"
-          fadeToColor="none"
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
         />
-      </Text>
+      )}
 
       <Text>{'\n'}</Text>
       <CustomButton
         text="Schedule Daily Notifications"
-        onPress={() => scheduleNotification()}
+        onPress={scheduleNotification}
         type="greenButton"
       />
 
       <Text>{'\n'}</Text>
       <CustomButton
         text="End All Notifications"
-        onPress={() => closeNotification()}
+        onPress={closeNotification}
         type="redButton"
       />
     </ScrollView>
@@ -93,18 +96,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#736467',
   },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
   title: {
     fontSize: 28,
     color: 'white',
     marginVertical: -35,
     alignSelf: 'center',
     marginHorizontal: 8,
+  },
+  subtitle: {
+    fontSize: 22,
+    color: 'black',
+    marginVertical: -35,
+    alignSelf: 'center',
+    marginHorizontal: 8,
+    fontWeight: 'bold',
   },
   options: {
     fontSize: 15,
@@ -115,5 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
-*/
+export default NotificationScreen;
