@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  Animated,
-} from 'react-native';
+import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Animated} from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';
-
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import { auth, db } from '../../firebase';  // Adjust the path as necessary
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import { auth, db } from '../firebase';  // Adjust the path as necessary
 import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 
