@@ -14,46 +14,38 @@ const SettingsScreen = () => {
       type: 'info',
       text1: 'Currently empty',
       position: 'top',
-      //bottomOffset: 100,
     });
     navigation.navigate('ProfilePage')
   };
   
 
   return (
-    <View style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
         <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
         <Text style={styles.title}>Settings</Text>
-        <View style={styles.top} />
         <Text style={styles.options}>
           {'\n'}
-          {'\n'}
         </Text>
-      </View>
-
-      <Text style={styles.subtitle}>
-          {'\n'}
-          {'\n'}
-        </Text>
-      <CustomButton
+        </View>
+        <CustomButton
         text="Settings"
         onPress={empty}
         type="greenButton"
       />
     <Toast />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
- 
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderBottomWidth: 300,
+    borderBottomColor: '#FFF7F5',
+    backgroundColor: '#736467',
   },
+  
   title: {
     fontSize: 28,
     color: 'white',

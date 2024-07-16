@@ -5,8 +5,9 @@ import { useNavigation } from '@react-navigation/core';
 //import CheckBox from '@react-native-community/checkbox';
 //import { CustomInput } from '../components/CustomInput';
 //import { CustomButton } from '../components/CustomButton';
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '../firebase.js';
+import { auth, createUserWithEmailAndPassword } from '../firebase.js';
 import { firestore, getDoc, setDoc, doc } from '../firebase.js';
+import { Stack } from "expo-router";
 import Logo from '../assets/images/Logo.png';
 import GoogleButton from '../assets/images/SignInWithGoogle.png'
 import Toast from 'react-native-toast-message';
@@ -37,7 +38,7 @@ const SignUpScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.navigate("ProfilePage")
+        navigation.navigate("HomeScreen")
       }
     })
 
@@ -150,12 +151,14 @@ const SignUpScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={{ height: height }}>
+      <Stack.Screen options={{ header: () => null }} />
+      
     <ImageBackground source={SignUpBackGround} style={styles.background}>
       
         <View style={styles.contianer}/>
           <Image
             source={Logo}
-            style={(styles.logo,  {height: height * 0.20 })}
+            style={(styles.logo,  {height: height * 0.33 })}
             resizeMode="contain"
           />
           <View style={styles.container}></View>

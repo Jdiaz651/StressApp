@@ -3,6 +3,7 @@ import {View, Button, SafeAreaView, Text, Image, StyleSheet,} from 'react-native
 import { CustomButton } from '../components/CustomButton';
 import Logo from '../assets/images/Logo.png';
 import Modal from 'react-native-modal';
+import { Stack } from "expo-router";
 
 const ChoiceScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -12,6 +13,7 @@ const ChoiceScreen = () => {
 
   return (
     <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
           <CustomButton text="≡" href="ProfilePage" type="blackBackButton" />
@@ -27,7 +29,7 @@ const ChoiceScreen = () => {
 
       <Text style={styles.title}>What would you like to do?</Text>
 
-      <CustomButton text="Dashboard" href="/" type="CHOICE" />
+      <CustomButton text="Dashboard" href="StressDataScreen1" type="CHOICE" />
 
       <CustomButton text="Immediate Excercises" href="/" type="CHOICE" />
 

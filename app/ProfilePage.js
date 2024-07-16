@@ -14,6 +14,7 @@ import settings from '../assets/MenuScreen/settings.png';
 import about from '../assets/MenuScreen/about.png';
 import help from '../assets/MenuScreen/help.png';
 import new_lake from '../assets/MenuScreen/new_lake.png';
+import policy from '../assets/MenuScreen/policy.png';
 import { StatusBar } from 'react-native';
 import { Stack } from "expo-router";
 
@@ -114,10 +115,12 @@ const ProfilePage = () => {
             case 'Help':
               navigation.navigate('HelpScreen');
               break;
+            case 'Policy':
+              navigation.navigate('PolicyScreen');
+              break;
             case 'LogOut':
               handleSignOut();
               
-
               break;
             default:
               setCurrentTab(title);
@@ -209,6 +212,7 @@ const ProfilePage = () => {
           {TabButton(currentTab, setCurrentTab, 'Notifications', notifications, navigation)}
           {TabButton(currentTab, setCurrentTab, 'About', about, navigation)}
           {TabButton(currentTab, setCurrentTab, 'Help', help, navigation)}
+          {TabButton(currentTab, setCurrentTab, 'Policy', policy, navigation)}
           {TabButton(currentTab, setCurrentTab, 'LogOut', logout, navigation)}
         </View>
         <Toast />

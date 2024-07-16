@@ -7,6 +7,7 @@ import { CustomButton } from '../components/CustomButton';
 import Logo from '../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
+import { Stack } from "expo-router";
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +54,7 @@ const ForgotPasswordScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.root}>
         <SafeAreaView>
           <Image source={Logo} style={styles.logo} resizeMode="contain" />

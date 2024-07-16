@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import Logo from '../../assets/images/Logo.png';
-import { CustomButton } from '../../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import { CustomButton } from '../components/CustomButton';
+import { Stack } from "expo-router";
 
 const PolicyScreen = () => {
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={true}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.root}>
         <Image source={Logo} style={styles.logo} resizeMode="contain" />
 
-        <CustomButton text="✖" href="/" type="QUINARY" />
+        <CustomButton text="<" href="ProfilePage" type="blackBackButton" />
         <Text style={styles.title}>Policy</Text>
 
         <Text>
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
     fontWeight: 'bold',
     color: 'black',
-    marginVertical: 80,
+    marginVertical: 20,
   },
   SubHeader: {
     fontSize: 15,

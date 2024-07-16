@@ -1,31 +1,30 @@
-// StressDataScreen.js
+// This StressDataScreen.js does not work, but contains the original idea with the Firebase Firestore 
+// and ALL the charts, which should be separated as shown in the Figma
+
 import React, { useState, useEffect } from 'react';
-import {
-  ScrollView,
-  Image,
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  ActivityIndicator,
-} from 'react-native';
+import { ScrollView, Image, View, Text, StyleSheet, Dimensions, ActivityIndicator} from 'react-native';
 import { LineChart, PieChart, BarChart } from 'react-native-chart-kit';
-import { firebase } from '../FirebaseConfig'; 
+import { auth, signOut } from '../firebase.js';
+import { firestore, getDoc, doc } from '../firebase.js';
 import Logo from '../../assets/images/Logo.png';
 import { CustomButton } from '../components/CustomButton';
+import { useNavigation } from '@react-navigation/core'
 
-const StressDataScreen = ({ navigation }) => {
+
+
+const StressDataScreen = () => {
+
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [dataInControlAndChange, setDataInControlAndChange] = useState(null);
+  const navigation = useNavigation()
+  const user = auth.currentUser;
 
-  const user = firebase.auth().currentUser;
-  const db = firebase.firestore();
-
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const snapshotDailyLog = await db
+        const snapshotDailyLog = await firestore
           .collection('DailyLog')
           .doc(user.uid)
           .collection('dates')
@@ -36,7 +35,7 @@ const StressDataScreen = ({ navigation }) => {
         });
         setData(dataDailyLog);
 
-        const snapshotInControl = await db
+        const snapshotInControl = await firestore
           .collection('InControlAndChange')
           .doc(user.uid)
           .collection('dates')
@@ -64,7 +63,7 @@ const StressDataScreen = ({ navigation }) => {
       </View>
     );
   }
-
+*/
   // Prepare data for the line chart
   const lineChartData = {
     labels: Object.keys(data).map((dateString) => {
