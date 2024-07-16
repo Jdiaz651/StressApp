@@ -58,7 +58,8 @@
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "~0.19.10",
     "react-simple-checkbox": "^1.3.0",
-    "@react-native-community/datetimepicker": "8.0.1"
+    "@react-native-community/datetimepicker": "8.0.1",
+    "expo-random": "~14.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

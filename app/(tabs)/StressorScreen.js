@@ -1,19 +1,21 @@
 import React from 'react';
 import { View, SafeAreaView, Text, Image, StyleSheet } from 'react-native';
-import { CustomButton } from '../components/CustomButton';
+import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
+import { useNavigation } from '@react-navigation/core';
 
-const StressorScreen = ({ navigation }) => {
+const StressorScreen = () => {
   const today = new Date();
+  const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={[styles.root]}>
+    <SafeAreaView style={styles.root}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
           <CustomButton
             text="<"
-            onPress={() => navigation.goBack()}
-            type="blackBackButton"
+            onPress={() => navigation.navigate('LoginScreen')}
+            type="whiteBackButton"
           />
         </View>
         <View
@@ -32,11 +34,13 @@ const StressorScreen = ({ navigation }) => {
           text="Home"
           onPress={() => navigation.navigate('Reasons', { stressor: 'home' })}
           type="STRESSOR"
+          
         />
         <CustomButton
           text="Work"
           onPress={() => navigation.navigate('Reasons', { stressor: 'work' })}
           type="STRESSOR"
+          
         />
       </View>
       <View style={styles.row}>
@@ -44,11 +48,13 @@ const StressorScreen = ({ navigation }) => {
           text="School"
           onPress={() => navigation.navigate('Reasons', { stressor: 'school' })}
           type="STRESSOR"
+          
         />
         <CustomButton
           text="Social Setting"
           onPress={() => navigation.navigate('Reasons', { stressor: 'social' })}
           type="STRESSOR"
+          
         />
       </View>
     </SafeAreaView>
@@ -91,6 +97,11 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 

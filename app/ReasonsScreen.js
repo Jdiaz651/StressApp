@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  Alert,
-  Button,
-} from 'react-native';
+import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, Button, } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
 import { CustomSelect } from '../components/CustomSelect';
 import { CustomInput } from '../components/CustomInput';
-import Logo from '../../assets/images/Logo.png';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import Logo from '../assets/images/Logo.png';
+import { auth, signOut } from '../firebase.js';
+import { firestore, getDoc, doc } from '../firebase.js';
 import moment from 'moment';
 
 const ReasonsScreen = ({ route, navigation }) => {
   const [reasons, setReasons] = useState([]);
   const [reasonsCustom, setReasonsCustom] = useState('');
   const { stressor } = route.params;
-  const user = auth().currentUser;
+  const user = auth.currentUser;
   const today = new Date();
   const myDate = moment(today).format('YYYY-MM-DD');
-
-  var db = firestore();
 
   const data = {
     work: [
