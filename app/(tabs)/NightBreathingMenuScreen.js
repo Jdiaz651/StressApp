@@ -563,22 +563,22 @@ const handlePress = async (music, cycle) => {
   let soundFile = '';
   switch (music[0]) {
     case 'Waves':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     case 'Rain':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     case 'Fire':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     case 'Forest':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     case 'Meditation':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     case 'Birds':
-      soundFile = 'explosion_3.mp3';
+      soundFile = 'waves.mp3';
       break;
     default:
       console.log('Invalid music choice');
