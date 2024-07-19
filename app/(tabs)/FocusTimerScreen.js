@@ -21,7 +21,7 @@ import Forest from '../../assets/gif/forest3.gif';
 import Meditation from '../../assets/gif/meditation3.gif';
 import Birds from '../../assets/gif/birds3.gif';
 
-const AnxietyTimerScreen = ({ navigation }) => {
+const FocusTimerScreen = ({ navigation }) => {
   const [timer, setTimer] = useState(0);
   const [backgroundImage, setBackgroundImage] = useState(null);
 
@@ -228,4 +228,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnxietyTimerScreen;
+export default FocusTimerScreen;

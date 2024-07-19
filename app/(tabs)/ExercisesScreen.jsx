@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet,} from 'react-native';
 import { useNavigation } from 'expo-router';
 import { CustomButton } from '../../components/CustomButton';
 
@@ -15,7 +10,7 @@ const ExercisesScreen = () => {
     <SafeAreaView style={[styles.root]}>
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="<" href='..' type="blackBackButton" />
+          <CustomButton text="<" href='HomeScreen' type="blackBackButton" />
         </View>
       </View>
 
@@ -30,13 +25,13 @@ const ExercisesScreen = () => {
 
       <CustomButton
         text="Ease Your Sleep"
-        href= "BreathingMenuScreen"
+        href= "NightBreathingScreen"
         type="EXERCISE"
       />
 
       <CustomButton
         text="Strengthen Your Focus"
-        href='AnxietyBreathingMenuScreen'
+        href='FocusBreathingScreen'
         type="EXERCISE"
       />
     </SafeAreaView>

@@ -12,7 +12,7 @@ import { CustomButton } from '../../components/CustomButton';
 import { CustomSelect } from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
 
-const MusicSelectionScreen = () => {
+const DayMusicSelectionScreen = () => {
   const [music, setMusic] = useState('');
   const [cycle, setCycle] = useState(0);
   const navigation = useNavigation();
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MusicSelectionScreen;
+export default DayMusicSelectionScreen;

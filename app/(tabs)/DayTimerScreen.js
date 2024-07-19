@@ -144,7 +144,7 @@ const DayTimerScreen = () => {
         if (soundRef.current) {
           soundRef.current.stopAsync(); // Stop the sound
         }
-        navigation.navigate('MusicSelectionScreen');
+        navigation.navigate('DayBreathingScreen');
       }
       return lastTimer - 1;
     });
@@ -166,7 +166,7 @@ const DayTimerScreen = () => {
           <View style={{ width: 100 }}>
             <CustomButton
               text="<"
-              onPress={() => navigation.goBack()}
+              href='HomeScreen'
               type="blackBackButton"
             />
           </View>
@@ -181,6 +181,8 @@ const DayTimerScreen = () => {
         </Text>
 
         <View style={styles.container}>
+          {/* SVG is currently not working
+          
           <Svg height={size} width={size} style={styles.slider}>
             <G scale={size / 244}>
               <AnimatedCircle cx={posX} cy={posY} r="12" fill="#EDE9E9" />
@@ -211,7 +213,7 @@ const DayTimerScreen = () => {
                 />
               </G>
             </G>
-          </Svg>
+          </Svg>*/}
           <Animated.Text style={styles.text}>{text[stage]}</Animated.Text>
         </View>
       </ImageBackground>

@@ -62,7 +62,7 @@ const DayBreathingScreen = () => {
         </Text>
 
         <View style={styles.button}>
-          <CustomButton text="Next" href="MusicSelectionScreen" type="SECONDARY" />
+          <CustomButton text="Next" href="DayMusicSelectionScreen" type="SECONDARY" />
         </View>
       </ImageBackground>
     </SafeAreaView>

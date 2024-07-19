@@ -31,7 +31,7 @@ const ChoiceScreen = () => {
 
       <CustomButton text="Dashboard" href="StressDataScreen1" type="CHOICE" />
 
-      <CustomButton text="Immediate Excercises" href="/" type="CHOICE" />
+      <CustomButton text="Immediate Excercises" href="ExercisesScreen" type="CHOICE" />
 
       <CustomButton text="Daily Roadmap" href="FeelingsScreen" type="CHOICE" />
 

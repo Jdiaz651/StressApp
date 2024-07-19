@@ -10,7 +10,7 @@ import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Cloud from '../../assets/gif/cloud.gif';
 
-const AnxietyBreathingMenuScreen = () => {
+const FocusBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
       <ImageBackground source={Cloud} style={styles.background}>
@@ -54,7 +54,7 @@ const AnxietyBreathingMenuScreen = () => {
         </Text>
 
         <View style={styles.button}>
-          <CustomButton href="AboutUsScreen" text="Next" type="SECONDARY" />
+          <CustomButton href="FocusMusicSelectionScreen" text="Next" type="SECONDARY" />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnxietyBreathingMenuScreen;
+export default FocusBreathingScreen;

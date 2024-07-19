@@ -14,7 +14,7 @@ import { CustomSelect } from '../../components/CustomSelect';
 import Logo from '../../assets/images/Logo.png';
 import { Audio } from 'expo-av';
 
-const NightBreathingMenuScreen = () => {
+const NightMusicSelectionScreen = () => {
   const [music, setMusic] = useState('');
   const [cycle, setCycle] = useState(0);
   const navigation = useNavigation();
@@ -599,7 +599,7 @@ return (
         <View style={{ width: 100 }}>
           <CustomButton
             text="<"
-            onPress={() => navigation.goBack()}
+            href="NightBreathingScreen"
             type="blackBackButton"
           />
         </View>
@@ -629,11 +629,11 @@ return (
         onSelect={(value) => setCycle(value)}
         type="PRIMARY"
       />
-
+      {/*TODO: Create a Night Timer Screen to link with this page */}
       <View style={styles.button}>
         <CustomButton
           text="Start"
-          href=""
+          href="HomeScreen" 
           onPress={() => handlePress(music, cycle)}
           type="SECONDARY"
         />
@@ -679,4 +679,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NightBreathingMenuScreen;
+export default NightMusicSelectionScreen;

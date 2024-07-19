@@ -12,7 +12,7 @@ import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import NightSkyGif from '../../assets/gif/NightSkyGif.gif';
 
-const BreathingMenuScreen = () => {
+const NightBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
       <ImageBackground source={NightSkyGif} style={styles.background}>
@@ -62,7 +62,7 @@ const BreathingMenuScreen = () => {
         </Text>
 
         <View style={styles.button}>
-          <CustomButton text="Next" href="/" type="SECONDARY" />
+          <CustomButton text="Next" href="NightMusicSelectionScreen" type="SECONDARY" />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BreathingMenuScreen;
+export default NightBreathingScreen;
