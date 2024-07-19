@@ -142,7 +142,7 @@ const StressDataScreen1 = () => {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        borderBottomWidth: 10,
+        borderBottomWidth: 0,
         borderBottomColor: '#FFF7F5',
         backgroundColor: '#59849b',
        

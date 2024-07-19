@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   subTitle: {
-    fontSize: 17,
+    fontSize: 20,
 
     color: '#000000',
     marginTop: -70,

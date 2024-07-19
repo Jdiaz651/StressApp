@@ -1,3 +1,7 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+-------------------------------------------------------------------------------------------------
+
 import React from 'react';
 import {
   View,
@@ -12,7 +16,7 @@ import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Background2 from '../../assets/images/Background2.png';
 
-const AwarenessFeelingsScreen = () => {
+const AwarenessBehaviorScreen = () => {
   const { height } = useWindowDimensions();
 
   return (
@@ -29,8 +33,9 @@ const AwarenessFeelingsScreen = () => {
           </View>
         </View>
       </View>
+
       <Text style={styles.title}>
-        <Text style={{ fontWeight: 'bold' }}> Feelings </Text>
+        <Text style={{ fontWeight: 'bold' }}> Behavior </Text>
       </Text>
 
       <View style={styles.container}>
@@ -44,12 +49,12 @@ const AwarenessFeelingsScreen = () => {
             <Text style={styles.title}>{'\n This may look like:'} </Text>
             <Text>
               {'\n'}
-              {'\n•Alienation \n'}
-              {'•Apathy \n'}
-              {'•Depression\n'}
-              {'•Fear  \n'}
-              {'•Irritability \n'}
-              {'•Loss of confidence \n'}
+              {'\n •Accident Prone \n'}
+              {' •Insomnia  \n'}
+              {' •Loss of appetite \n'}
+              {' •Loss of sex drive\n'}
+              {' •More addiction  \n'}
+              {' •Restlessness \n'}
             </Text>
           </Text>
         </View>
@@ -64,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+
   root: {
     flex: 1,
     alignItems: 'center',
@@ -71,6 +77,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
+    fontWeight: 'bold',
     height: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -124,4 +131,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AwarenessFeelingsScreen;
+export default AwarenessBehaviorScreen;
+*/

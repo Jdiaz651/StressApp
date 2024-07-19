@@ -1,3 +1,7 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+-------------------------------------------------------------------------------------------------
+
 import React from 'react';
 import {
   View,
@@ -7,11 +11,12 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from 'react-native';
+
 import { CustomButton } from '../../components/CustomButton';
 import Logo from '../../assets/images/Logo.png';
 import Background1 from '../../assets/images/Background2.png';
 
-const AwarenessBodyScreen = () => {
+const AwarenessMindScreen = () => {
   const { height } = useWindowDimensions();
 
   return (
@@ -30,7 +35,7 @@ const AwarenessBodyScreen = () => {
       </View>
 
       <Text style={styles.title}>
-        <Text style={{ fontWeight: 'bold' }}> Body </Text>
+        <Text style={{ fontWeight: 'bold' }}> Mind </Text>
       </Text>
 
       <View style={styles.container}>
@@ -41,15 +46,15 @@ const AwarenessBodyScreen = () => {
         />
         <View style={styles.viewQuadText}>
           <Text style={styles.quadText}>
-            <Text style={styles.title}>{'\n This may look like:'} </Text>
+            <Text style={styles.title}>{'\n     This may look like:'} </Text>
             <Text>
               {'\n'}
-              {'\n  •Difficulty breathing \n'}
-              {'  •Fatigue  \n'}
-              {'  •Headaches \n'}
-              {'  •High Blood Pressure\n'}
-              {'  •Palpitations \n'}
-              {'  •Skin Irritation \n'}
+              {'\n   •Difficulty concentrating \n'}
+              {'   •Impaired judgement\n'}
+              {'   •Indecision  \n'}
+              {'   •Muddled thinking \n'}
+              {'   •Negativity \n'}
+              {'   •Worrying \n'}
             </Text>
           </Text>
         </View>
@@ -61,7 +66,6 @@ const AwarenessBodyScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -125,4 +129,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AwarenessBodyScreen;
+export default AwarenessMindScreen;
+*/

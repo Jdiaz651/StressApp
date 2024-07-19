@@ -1,3 +1,5 @@
+// The SVG is not working as intended
+
 import React, { useState } from 'react';
 import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Animated} from 'react-native';
 import Svg, { G, Path, Circle, Polygon } from 'react-native-svg';

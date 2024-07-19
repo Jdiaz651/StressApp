@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
 import { useNavigation } from '@react-navigation/core'
 import Toast from 'react-native-toast-message';
+import { Stack } from "expo-router";
 //TODO: Complete the Settings Screen
 const SettingsScreen = () => {
   
@@ -21,6 +22,7 @@ const SettingsScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.root}>
         <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
         <Text style={styles.title}>Settings</Text>
@@ -28,11 +30,15 @@ const SettingsScreen = () => {
           {'\n'}
         </Text>
         </View>
-        <CustomButton
-        text="Settings"
-        onPress={empty}
-        type="greenButton"
-      />
+        <View style={styles.container_greenButton}>
+        <TouchableOpacity
+        
+        onPress={() => empty()}>
+        
+        <Text style={styles.text_greenButton}>Settings</Text>
+        </TouchableOpacity>
+      
+      </View>
     <Toast />
     </ScrollView>
   );
@@ -68,6 +74,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginVertical: 5,
   },
+  container_greenButton: {
+    backgroundColor: '#f27c7a',
+    width: 350,
+    padding: 18,
+    alignSelf: 'center',
+    borderRadius: 30,
+  },
+  text_greenButton: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    alignSelf: 'center',
+  },
+  
 });
 
 export default SettingsScreen;

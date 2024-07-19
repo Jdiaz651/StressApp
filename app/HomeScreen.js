@@ -33,9 +33,9 @@ const ChoiceScreen = () => {
 
       <CustomButton text="Immediate Excercises" href="/" type="CHOICE" />
 
-      <CustomButton text="Daily Roadmap" href="EmotionScreen" type="CHOICE" />
+      <CustomButton text="Daily Roadmap" href="FeelingsScreen" type="CHOICE" />
 
-      <CustomButton text="Monthly Calendar" href="/" type="CHOICE" />
+      <CustomButton text="Monthly Calendar" href="MoodDiaryScreen" type="CHOICE" />
 
       <View>
         <Modal
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
 import Toast from 'react-native-toast-message';
 import PushNotification from 'react-native-push-notification';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Stack } from "expo-router";
 
 const NotificationScreen = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const scheduleNotification = () => {
+    // TODO: Apply notification settings
+    /*
     PushNotification.localNotificationSchedule({
       channelId: 'my-channel',
       title: 'Daily Reminder',
@@ -19,21 +22,23 @@ const NotificationScreen = () => {
       repeatType: 'day',
       repeatTime: 1,
     });
+    */
     Toast.show({
       type: 'success',
       text1: 'Notifications scheduled',
-      position: 'bottom',
-      bottomOffset: 100,
+      position: 'top',
+      
     });
   };
 
   const closeNotification = () => {
-    PushNotification.cancelAllLocalNotifications();
+    // TODO: Apply notification settings
+    //PushNotification.cancelAllLocalNotifications();
     Toast.show({
       type: 'success',
       text1: 'All notifications cleared',
-      position: 'bottom',
-      bottomOffset: 100,
+      position: 'top',
+      
     });
   };
 
@@ -45,6 +50,7 @@ const NotificationScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.root}>
         <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
         <Text style={styles.title}>Notifications</Text>
@@ -59,34 +65,47 @@ const NotificationScreen = () => {
           {'\n'}
           {'\n'}
         </Text>
-      <CustomButton
-        text="Select Time"
-        onPress={() => setShow(true)}
-        type="greenButton"
-      />
+
+      <View style={styles.container_greenButton}>
+      <TouchableOpacity
+        
+        onPress={() => setShow(true)}>
+        
+      <Text style={styles.text_greenButton}>Select Time</Text>
+      </TouchableOpacity>
+      
+      </View>
       {show && (
         <DateTimePicker
           value={date}
           mode="time"
-          is24Hour={true}
+          is24Hour={false}
           display="default"
           onChange={onChange}
         />
       )}
 
       <Text>{'\n'}</Text>
-      <CustomButton
-        text="Schedule Daily Notifications"
-        onPress={scheduleNotification}
-        type="greenButton"
-      />
-
+      
+      <View style={styles.container_greenButton}>
+      <TouchableOpacity
+        
+        onPress={() => scheduleNotification()}>
+        
+      <Text style={styles.text_greenButton}>Schedule Daily Notifications</Text>
+      </TouchableOpacity>
+      </View>
       <Text>{'\n'}</Text>
-      <CustomButton
-        text="End All Notifications"
-        onPress={closeNotification}
-        type="redButton"
-      />
+      
+      <View style={styles.container_greenButton}>
+      <TouchableOpacity
+        
+        onPress={() => closeNotification()}>
+        
+      <Text style={styles.text_greenButton}>End All Notifications</Text>
+      </TouchableOpacity>
+      </View>
+      <Toast />
     </ScrollView>
   );
 };
@@ -117,6 +136,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 30,
     marginVertical: 5,
+  },
+  container_greenButton: {
+    backgroundColor: '#f27c7a',
+    width: 350,
+    padding: 18,
+    alignSelf: 'center',
+    borderRadius: 30,
+  },
+  text_greenButton: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    alignSelf: 'center',
   },
 });
 
