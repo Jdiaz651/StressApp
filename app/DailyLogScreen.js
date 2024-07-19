@@ -9,6 +9,7 @@ import Logo from '../assets/images/Logo.png';
 import moment from 'moment';
 import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/core';
+import { Stack } from "expo-router";
 
 // TODO: Connect to Firebase Firestore to send and receive data
 
@@ -166,6 +167,7 @@ const DailyLogScreen = () => {
 
   return (
     <ScrollView>
+      <Stack.Screen options={{ header: () => null }} />
       <SafeAreaView style={[styles.root]}>
         <View style={styles.header}>
           <View style={{ width: 150 }}>
@@ -388,6 +390,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
+    height: 170,
   },
   title: {
     fontSize: 34,

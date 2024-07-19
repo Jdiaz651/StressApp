@@ -6,40 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3aaa6cc7-7fe2-4738-a54d-e8011d4172eb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AwarenessBehaviorScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AwarenessBodyScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AwarenessFeelingsScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AwarenessMindScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AwarenessScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/DashboardScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/FoodFTScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/InControlScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/IntentionScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/MoodDiaryScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/OptionScreen.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/StressorScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AboutUsScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/AboutUsScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/EmotionScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DailyLogScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/DailyLogScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ForgotPasswordScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ForgotPasswordScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HelpScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/HelpScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NotificationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/NotificationScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ReasonsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReasonsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/SettingsScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/SettingsScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/SignUpScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/SignUpScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StressDataScreen1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/StressDataScreen1.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StressDataScreen2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/StressDataScreen2.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StressDataScreen3.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/StressDataScreen3.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StressDataScreen4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/StressDataScreen4.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CustomInput/CustomInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CustomInput/CustomInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CustomInput/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CustomInput/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/DailyDataScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/DailyLogScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/EmotionScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EmotionScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

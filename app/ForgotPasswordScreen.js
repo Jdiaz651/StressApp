@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import {View, Text, Image, StyleSheet, Alert, ScrollView,SafeAreaView,} from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import CustomInput from '../components/CustomInput';
+import { CustomInput } from '../components/CustomInput';
 import { CustomButton } from '../components/CustomButton';
 import Logo from '../assets/images/Logo.png';
 import auth from '@react-native-firebase/auth';
