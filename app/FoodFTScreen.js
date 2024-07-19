@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import {View, ScrollView, SafeAreaView, Text, Image, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import { auth, db } from '../../firebase';  // Adjust the path as necessary
-import moment from 'moment';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import { auth } from '../firebase';
+import { firestore, doc, setDoc, collection } from '../firebase.js';
+import { useNavigation } from '@react-navigation/core';
+import { Stack } from "expo-router";
 
-const FoodFTScreen = ({ navigation }) => {
+
+const FoodFTScreen = () => {
   const [what, setWhat] = useState(0);
   const [who, setWho] = useState(0);
   const [where, setWhere] = useState(0);
   const [when, setWhen] = useState(0);
   const [why, setWhy] = useState(0);
+
+  const navigation = useNavigation();
 
   const whatData = [
     '',
@@ -93,30 +90,27 @@ const FoodFTScreen = ({ navigation }) => {
   ];
 
   const user = auth.currentUser;
+  const myDate = new Date().toISOString().split('T')[0];
 
-  const today = new Date();
-  const myDate = moment(today).format('YYYY-MM-DD');
+  const handlePress = async () => {
 
-  const handlePress = () => {
     if (!what) Alert.alert('Please pick a what question');
     else if (!who) Alert.alert('Please pick a who question');
     else if (!where) Alert.alert('Please pick a where question');
     else if (!when) Alert.alert('Please pick a when question');
     else if (!why) Alert.alert('Please pick a why question');
     else {
-      db.collection('FoodFT')
-        .doc(user.uid)
-        .collection('dates')
-        .doc(myDate)
-        .set({
-          what: whatData[what],
-          who: whoData[who],
-          where: whereData[where],
-          when: whenData[when],
-          why: whyData[why],
-        })
+      // Although the data is sent, it may be more convenient to send data to its own collection rather than a collection group
+      const userDocRef = doc(collection(firestore, 'FoodFT', user.uid, 'dates'), myDate);
+      await setDoc(userDocRef, {
+        what: whatData[what],
+        who: whoData[who],
+        where: whereData[where],
+        when: whenData[when],
+        why: whyData[why],})
+      
         .then(() => {
-          navigation.navigate('Mood Diary');
+          navigation.navigate('MoodDiaryScreen');
         })
         .catch((error) => {
           console.error('Error writing document: ', error);
@@ -127,11 +121,12 @@ const FoodFTScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
         <View style={styles.header}>
           <View style={{ width: 100 }}>
             <CustomButton
               text="<"
-              onPress={() => navigation.goBack()}
+              href="OptionScreen"
               type="blackBackButton"
             />
           </View>
@@ -207,14 +202,16 @@ const FoodFTScreen = ({ navigation }) => {
             })}
           </Picker>
         </View>
-
-        <View style={styles.button}>
-          <CustomButton
-            text="Submit"
-            onPress={() => handlePress()}
-            type="SECONDARY"
-          />
-        </View>
+        <Text style={{fontSize:30}}>{'\n'}</Text>
+        <View style={styles.container_SECONDARY}>
+        <TouchableOpacity
+        
+        onPress={() => handlePress()}>
+        
+        <Text style={styles.text_SECONDARY}>Submit</Text>
+        </TouchableOpacity>
+        
+      </View>
       </SafeAreaView>
     </ScrollView>
   );
@@ -224,11 +221,11 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFF7F5',
+    
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -255,7 +252,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   label: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#736468',
     marginTop: 2,
@@ -268,6 +265,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column-reverse',
     paddingBottom: 10,
+  },
+  container_SECONDARY: {
+    backgroundColor: '#457f9d',
+    width: 150,
+    padding: 8.5,
+    marginVertical: 30,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  text_SECONDARY: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 24,
   },
 });
 

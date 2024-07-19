@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, Image, StyleSheet,} from 'react-native';
 import { CustomButton } from '../components/CustomButton';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import Logo from '../../assets/images/Logo.png';
+import { auth, firestore, doc, setDoc, collection, getDoc } from '../firebase.js';
+import Logo from '../assets/images/Logo.png';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Stack } from "expo-router";
 
-const DailyDataScreen1 = ({ navigation, route }) => {
+const DailyDataScreen1 = () => {
+
+  const route = useRoute();
+  const navigation = useNavigation();
   const { date } = route.params;
   const [data, setData] = useState(null);
-  const user = auth().currentUser;
-  var db = firestore();
-
+  const user = auth.currentUser;
+  
+/* TODO: Retrieve data from Firestore
   useEffect(() => {
     const fetchData = async () => {
       try {
         console.log('date: ' + date);
-        const dailyLogDoc = await db
-          .collection('DailyLog')
-          .doc(user.uid)
-          .collection('dates')
-          .doc(date)
-          .get();
+        const dailyLogDoc = await getDoc(collection(firestore,'DailyLog',user.uid,'dates'),date);
         if (dailyLogDoc.exists) {
           // console.log(dailyLogDoc);
-          setData(dailyLogDoc._data);
+          setData(dailyLogDoc.data);
         } else {
           console.log('no data found');
         }
@@ -41,15 +33,16 @@ const DailyDataScreen1 = ({ navigation, route }) => {
     fetchData();
   }, [date]);
   console.log(data);
-
+*/
   return (
     <ScrollView>
       <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
         <View style={styles.header}>
           <View style={{ width: 150 }}>
             <CustomButton
               text="<"
-              onPress={() => navigation.goBack()}
+              href='MoodDiaryScreen'
               type="blackBackButton"
             />
           </View>
@@ -62,7 +55,7 @@ const DailyDataScreen1 = ({ navigation, route }) => {
           </View>
         </View>
         <View style={styles.buttonWrapper}>
-          <Text style={styles.title}>Daily Log Data</Text>
+          <Text style={styles.title}>Daily Log Data{'\n'}</Text>
 
           <View style={styles.containter}>
             <Text style={styles.label}>What activity did you do?</Text>
@@ -95,11 +88,11 @@ const DailyDataScreen1 = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#FFF7F5',
   },
   header: {
     width: '100%',
     flexDirection: 'row',
+    height:160,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,

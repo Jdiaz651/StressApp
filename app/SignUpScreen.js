@@ -162,11 +162,6 @@ const SignUpScreen = () => {
             resizeMode="contain"
           />
           <View style={styles.container}></View>
-{/*           <CustomButton
-            text="✖"
-            onPress={() => navigation.navigate('Home')}
-            type="QUINARY"
-          /> */}
 
           <Text style={styles.title}>Sign Up</Text>
           <Text style={styles.subTitle}>Please fill in the fields below</Text>

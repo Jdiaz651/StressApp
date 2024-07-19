@@ -1,25 +1,49 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
+import { View, TouchableOpacity, SafeAreaView, Text, Image, StyleSheet,} from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import Logo from '../assets/images/Logo.png';
+import {CustomButton} from '../components/CustomButton';
+import { Stack } from "expo-router";
 
-import Logo from '../../assets/images/Logo.png';
+const OptionScreen = () => {
 
-const AwarenessScreen = () => {
+  const navigation = useNavigation();
 
+/*
+  // this one i have added here
+  const CustomButton = ({ text, href, type, color }) => {
+    const buttonStyle =
+      type === 'blackBackButton'
+        ? styles.blackBackButton
+        : type === 'smallSecondary'
+        ? styles.smallSecondaryButton
+        : styles.button;
+
+    const buttonTextStyle =
+      type === 'blackBackButton'
+        ? styles.blackBackButtonText
+        : type === 'smallSecondary'
+        ? styles.smallButtonText
+        : styles.buttonText;
+    const buttonColor = color || '#457F9D';
+    return (
+      <TouchableOpacity
+        style={[buttonStyle, { backgroundColor: buttonColor }]}
+        //onPress={() => navigation.navigate('IntentionScreen')}
+      >
+        <Text style={[buttonTextStyle]}>{text}</Text>
+      </TouchableOpacity>
+    );
+  };*/
+  // ends here
   return (
     <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
           <CustomButton
             text="<"
-            href="/"
+            href="IntentionScreen"
             type="blackBackButton"
             color="white"
           />
@@ -34,37 +58,30 @@ const AwarenessScreen = () => {
       </View>
 
       <Text style={styles.normal}>
-        <Text style={{ fontWeight: 'bold' }}> Stress = </Text>
-        Body Reaction + Situation
+        <Text style={{ fontWeight: 'bold' }}>
+          {' '}
+          What would you like to choose?{' '}
+        </Text>
       </Text>
-
-      <Text style={styles.normal}>
-        <Text style={{ fontWeight: 'bold' }}> Anxiety = </Text>
-        Anticipation + Event (real or imagined)
-      </Text>
-
-      <View style={styles.buttonContainer}>
-        <CustomButton text="Body" href="/" type="SECONDARY" color="#df7a84" />
-
-        <CustomButton text="Mind" href="/" type="SECONDARY" color="#f8806f" />
-
-        <CustomButton
-          text="Feelings"
-          href="/"
-          type="SECONDARY"
-          color="#d46766"
-        />
-
-        <CustomButton
-          text="Behavior"
-          href="/"
-          type="SECONDARY"
-          color="#a44c5f"
-        />
+      <Text style={{fontSize:20}}>{'\n'}</Text>
+      <View style={styles.container_SECONDARY}>
+      <TouchableOpacity
+        
+        onPress={() => navigation.navigate('FoodFTScreen')}>
+        
+        <Text style={styles.text_SECONDARY}>{'\n'}Food for thought</Text>
+        </TouchableOpacity>
+        
       </View>
-
-      <View style={styles.btcont}>
-        <CustomButton text="Continue" href="/" type="smallSecondary" />
+      <Text style={{fontSize:20}}>{'\n'}</Text>
+      <View style={styles.container_SECONDARY}>
+      <TouchableOpacity
+        
+        onPress={() => navigation.navigate('DailyLogScreen')}>
+        
+        <Text style={styles.text_SECONDARY}>{'\n'}Daily Log</Text>
+        </TouchableOpacity>
+        
       </View>
     </SafeAreaView>
   );
@@ -83,7 +100,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   title: {
-    fontSize: 24,
+    fontSize: 50,
     fontWeight: 'bold',
     color: '#000000',
     marginVertical: 2,
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   normal: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'normal',
     color: '#000000',
     marginVertical: 10,
@@ -135,8 +152,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   button: {
-    width: 300, // Adjust the width as per your requirement
-    height: 60, // Adjust the height as per your requirement
+    width: 350, // Adjust the width as per your requirement
+    height: 100, // Adjust the height as per your requirement
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#457F9D',
@@ -157,7 +174,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', // You can adjust the font weight if needed
   },
   buttonText: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -176,7 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 80,
     marginBottom: 10,
   },
   smallButtonText: {
@@ -184,6 +201,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  container_SECONDARY: {
+    backgroundColor: '#df7a84',
+    width: '90%',
+    height: 140,
+    padding: 5,
+    marginVertical: 5,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  text_SECONDARY: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 40,
+    alignItems: 'center',
+  },
 });
 
-export default AwarenessScreen;
+export default OptionScreen;

@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  Image,
-  StyleSheet,
-  Alert,
-  Button,
-} from 'react-native';
+import {View, Text, ScrollView, SafeAreaView, Image, StyleSheet, Alert, Button, TouchableOpacity} from 'react-native';
 import { CustomInput } from '../components/CustomInput';
 import { CustomButton } from '../components/CustomButton';
 import { Picker } from '@react-native-picker/picker';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import Logo from '../../assets/images/Logo.png';
+import { auth } from '../firebase'; 
+import { doc, getDoc, setDoc, collection, firestore } from '../firebase';
+import Logo from '../assets/images/Logo.png';
 import moment from 'moment';
 import Modal from 'react-native-modal';
+import { useNavigation } from '@react-navigation/core';
+import { Stack } from "expo-router";
 
-const DailyLogScreen = ({ navigation }) => {
+// TODO: Connect to Firebase Firestore to send and receive data
+
+
+const DailyLogScreen = () => {
   const [activity, setActivity] = useState('');
   const [triggers, setTriggers] = useState(0);
   const [signs, setSigns] = useState(0);
@@ -35,6 +31,7 @@ const DailyLogScreen = ({ navigation }) => {
   const [customBehavior, setCustomBehavior] = useState('');
 
   // const activityData = ['','Exercise 🏃', 'Meditation 🧘', 'Reading 📖'];
+  
   const triggersData = ['', 'Home', 'School', 'Work', 'Social Life'];
   const signsData = ['', 'Body', 'Mind', 'Emotion', 'Behavior'];
   const bodyData = [
@@ -87,11 +84,12 @@ const DailyLogScreen = ({ navigation }) => {
     'Custom ',
   ];
 
-  const user = auth().currentUser;
-  var db = firestore();
+  const user = auth.currentUser;
+  const navigation = useNavigation();
 
-  const today = new Date();
-  const myDate = moment(today).format('YYYY-MM-DD');
+  //const today = new Date();
+  //const myDate = moment(today).format('YYYY-MM-DD');
+  const myDate = new Date().toISOString().split('T')[0];
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -99,33 +97,37 @@ const DailyLogScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-  let feeling = 'placeholder';
-  const doc = db
-    .collection('DailyLog')
-    .doc(user.uid)
-    .collection('dates')
-    .doc(myDate);
-  doc.get().then((doc) => {
+  const waitData = async () => {
+
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data();
     if (doc.exists) {
-      feeling = doc.data()['feeling'];
+      feeling = data()['feeling'];
     } else {
       console.log('not found');
     }
-  });
-  const doc1 = db
-    .collection('DailyLog')
-    .doc(user.uid)
-    .collection('dates')
-    .doc(myDate);
-  doc1.get().then((doc1) => {
+
+    return data
+  }
+
+  let feeling = 'placeholder';
+  const docRef = doc(collection(firestore,'DailyLog',user.uid,'dates'),myDate);
+  const data = waitData()
+
+    
+  async function doc1Data() {
+  const doc1 = doc(collection(firestore,'DailyLog',user.uid,'dates'),myDate);
+  const docSnap = await getDoc(docRef);
+  const data1 = docSnap.data(); 
+
     if (doc1.exists) {
       stressor = doc1.data()['triggers'];
     } else {
       console.log('not found');
     }
-  });
-
-  const handlePress = () => {
+  }
+  
+  const handlePress = async () => {
     const bodyFinal = body == 7 ? customBody : bodyData[body];
     const emotionFinal = emotion == 7 ? customEmotion : emotionsData[emotion];
     const mindFinal = mind == 6 ? customMind : mindData[mind];
@@ -135,16 +137,14 @@ const DailyLogScreen = ({ navigation }) => {
       strategies == 6 ? customStrategies : strategiesData[strategies];
 
     if (!activity) Alert.alert('Please pick an activity answer');
-    if (!triggers) Alert.alert('Please pick a triggers answer');
-    if (!signs) Alert.alert('Please pick a signs answer');
-    if (!anxietyLevel) Alert.alert('Please pick a number');
-    if (!strategies) Alert.alert('Please pick a strategies answer');
-    const dailyLogDoc = db
-      .collection('DailyLog')
-      .doc(user.uid)
-      .collection('dates')
-      .doc(myDate)
-      .set({
+    else if (!triggers) Alert.alert('Please pick a triggers answer');
+    else if (!signs) Alert.alert('Please pick a signs answer');
+    else if (!anxietyLevel) Alert.alert('Please pick a number');
+    else if (!strategies) Alert.alert('Please pick a strategies answer');
+    else {
+    const dailyLogDoc = doc(collection(firestore,'DailyLog',user.uid,'dates'),myDate)
+    try {
+      await setDoc(doc(firestore, 'DailyLog', user.uid, 'dates', myDate), {
         activity: activity,
         triggers: triggersData[triggers],
         signs: signsData[signs],
@@ -157,17 +157,23 @@ const DailyLogScreen = ({ navigation }) => {
         feeling: feeling,
         stressor: triggersData[triggers],
       });
-    navigation.navigate('Choice');
+    } catch (error) {
+      console.log('Error writing document: ', error);
+    }
+     
+    navigation.navigate('MoodDiaryScreen');
+  }
   };
 
   return (
     <ScrollView>
+      <Stack.Screen options={{ header: () => null }} />
       <SafeAreaView style={[styles.root]}>
         <View style={styles.header}>
           <View style={{ width: 150 }}>
             <CustomButton
               text="<"
-              onPress={() => navigation.goBack()}
+              href="OptionScreen"
               type="blackBackButton"
             />
           </View>
@@ -359,13 +365,14 @@ const DailyLogScreen = ({ navigation }) => {
             onPress={toggleModal}
             type="INFO"
           />
-          <View style={styles.button}>
-            <CustomButton
-              text="Submit"
-              onPress={() => handlePress()}
-              type="SECONDARY"
-            />
-          </View>
+      <View style={styles.container_SECONDARY}>
+        <TouchableOpacity
+          onPress={() => handlePress()}>
+        
+          <Text style={styles.text_SECONDARY}>Submit</Text>
+          </TouchableOpacity>
+        
+      </View>
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -383,6 +390,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
+    height: 170,
   },
   title: {
     fontSize: 34,
@@ -450,6 +458,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
 
     borderRadius: 20,
+  },
+  container_SECONDARY: {
+    backgroundColor: '#457f9d',
+    width: 150,
+    padding: 8.5,
+    marginVertical: 5,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  text_SECONDARY: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 24,
   },
 });
 

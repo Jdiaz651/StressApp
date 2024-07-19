@@ -1,3 +1,7 @@
+/* This file is no longer being used.
+  It is only here for archival purposes.
+-------------------------------------------------------------------------------------------------
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CustomButton } from '../../components/CustomButton';
@@ -51,3 +55,5 @@ const styles = StyleSheet.create({
 });
 
 export default DashboardScreen;
+
+*/

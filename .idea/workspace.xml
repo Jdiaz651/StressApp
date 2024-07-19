@@ -6,24 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3aaa6cc7-7fe2-4738-a54d-e8011d4172eb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/AssetTest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/LoginScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/PolicyScreen.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DailyLogScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/DailyLogScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ForgotPasswordScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ForgotPasswordScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/SettingsScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/SettingsScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/SignUpScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/SignUpScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/AccountScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HomeScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/NotificationsScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ReasonsScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/SettingsScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/SignUpScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/StressDataScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/StressDataScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/StressorScreen.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

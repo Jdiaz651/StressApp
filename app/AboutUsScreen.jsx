@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { CustomButton } from '../components/CustomButton';
+import { Stack } from "expo-router";
 
 const AboutUsScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.root}>
         <CustomButton text="<" href="ProfilePage" type="whiteBackButton" />
         <Text style={styles.title}>About Us</Text>
@@ -36,14 +38,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
     color: 'white',
     marginVertical: 20,
     alignSelf: 'center',
     fontWeight: "bold",
   },
   normal: {
-    fontSize: 20,
+    fontSize: 22,
     color: '#000000',
     marginVertical: 20,
     textAlign: 'center',

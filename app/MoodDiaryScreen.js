@@ -1,22 +1,24 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { CustomButton } from '../components/CustomButton';
 import { Calendar } from 'react-native-calendars';
-import moment from 'moment';
-import Logo from '../../assets/images/Logo.png';
+import Logo from '../assets/images/Logo.png';
+import { auth } from '../firebase'; 
+import { doc, getDoc, collection, firestore } from '../firebase';
+import { useNavigation } from '@react-navigation/core';
+import { Stack } from "expo-router";
 
-import { auth, db } from '../../firebase'; // Adjust the path as necessary
-import { doc, getDoc, collection } from 'firebase/firestore';
+const MoodDiaryScreen = () => {
 
-const MoodDiaryScreen = ({ navigation }) => {
   const [foodFTData, setFoodData] = useState([]);
   const [dailyLogData, setDailyData] = useState([]);
+  const [stressorData, setStressorData] = useState([]);
   const [indexD, setIndexD] = useState(0);
   const [index, setIndex] = useState(0);
-
+  const navigation = useNavigation();
+  
   const user = auth.currentUser;
-  const today = new Date();
-  const myDate = moment(today).format('YYYY-MM-DD');
+  const myDate = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
     stressorsData('2023-03-20');
@@ -26,7 +28,7 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function stressorsData(date) {
     try {
-      const docRef = doc(collection(db, 'stressors', user.uid, 'dates'), date);
+      const docRef = doc(collection(firestore, 'stressors', user.uid, 'dates'), date);
       const docSnap = await getDoc(docRef);
       const data = docSnap.data();
       if (data) {
@@ -41,7 +43,7 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function foodData(date) {
     try {
-      const docRef = doc(collection(db, 'FoodFT', user.uid, 'dates'), date);
+      const docRef = doc(collection(firestore, 'FoodFT', user.uid, 'dates'), date);
       const docSnap = await getDoc(docRef);
       const tempData = [];
       tempData.push(docSnap.data());
@@ -53,7 +55,7 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   async function dailyData(date) {
     try {
-      const docRef = doc(collection(db, 'DailyLog', user.uid, 'dates'), date);
+      const docRef = doc(collection(firestore, 'DailyLog', user.uid, 'dates'), date);
       const docSnap = await getDoc(docRef);
       const tempData = [];
       tempData.push(docSnap.data());
@@ -123,20 +125,16 @@ const MoodDiaryScreen = ({ navigation }) => {
 
   const onDayPress = (day) => {
     const selectedDate = day.dateString;
-    navigation.navigate('Data Screen', { date: selectedDate });
+    navigation.navigate('DailyDataScreen', { date: selectedDate });
   };
 
   return (
     <View style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton
-            text="<"
-            onPress={() => navigation.goBack()}
-            type="blackBackButton"
-          />
+              
         </View>
-
         <View
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
         >
@@ -177,6 +175,16 @@ const MoodDiaryScreen = ({ navigation }) => {
           }}
         />
       </View>
+      <Text style={{fontSize:30}}>{'\n'}</Text>
+      <View style={{ backgroundColor: '#f27c7a', width: 350,  padding: 18,  alignSelf: 'center',  borderRadius: 30,}}>
+        <TouchableOpacity
+        
+        onPress={() => navigation.navigate('HomeScreen')}>
+        
+        <Text style={styles.text_someButton}>{'Return to Home Screen'}</Text>
+        </TouchableOpacity>
+       
+        </View>
     </View>
   );
 };
@@ -193,7 +201,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 170,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -259,6 +267,12 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#FFF7F5',
+  },
+
+  text_someButton: {
+    color: 'white',
+    fontSize: 30,
+    alignSelf: 'center',
   },
 });
 
