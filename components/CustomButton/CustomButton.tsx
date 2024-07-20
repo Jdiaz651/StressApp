@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   container_exercisesButton: {
     backgroundColor: '#ec8e96',
     width: 380,
+    height: 125,
     padding: 18,
     alignSelf: 'center',
     borderRadius: 35,
@@ -221,11 +222,12 @@ const styles = StyleSheet.create({
   },
   container_EXERCISE: {
     backgroundColor: '#457f9d',
-    width: 175,
-    height: 175,
+    width: '90%',
+    height: 125,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 25,
+    borderRadius: 15,
+    marginBottom: 33
   },
   container_continueFButton: {
     borderWidth: 2,

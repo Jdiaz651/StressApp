@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
-
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import NightSkyGif from '../../assets/gif/NightSkyGif.gif';
+import { View, SafeAreaView, Text, Image, StyleSheet, ImageBackground,} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import NightSkyGif from '../assets/gif/NightSkyGif.gif';
+import { Stack } from "expo-router";
 
 const NightBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <ImageBackground source={NightSkyGif} style={styles.background}>
         <View style={styles.overlay} />
         <View style={styles.header}>
@@ -83,7 +77,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -137,7 +131,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     flexDirection: 'column-reverse',
-    paddingBottom: 10,
+    paddingBottom: 50,
   },
 });
 

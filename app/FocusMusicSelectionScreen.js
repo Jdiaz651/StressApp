@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  Alert,
-} from 'react-native';
+import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, Alert, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {CustomButton} from '../../components/CustomButton';
-import { CustomSelect } from '../../components/CustomSelect';
-import Logo from '../../assets/images/Logo.png';
-import { Audio } from 'expo-av';
+import {CustomButton} from '../components/CustomButton';
+import { CustomSelect } from '../components/CustomSelect';
+import Logo from '../assets/images/Logo.png';
+import { Stack } from "expo-router";
 
 const FocusMusicSelectionScreen = () => {
   const [music, setMusic] = useState('');
@@ -528,29 +520,8 @@ const FocusMusicSelectionScreen = () => {
   };
 */
 
-// TODO: Update the following so that the info is sent to Focus Timer Screen and handles the navigation
 const handlePress = async (music, cycle) => {
-  async function playSound(filePath, cycles) {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(filePath);
-
-    console.log('Playing Sound');
-    for (let i = 0; i < cycles; i++) {
-      try {
-        await sound.setPositionAsync(0);
-        await sound.playAsync().then(function (result) {
-          soundLength = result.durationMillis;
-        });
-        const durationInSeconds = soundLength;
-        await new Promise((resolve) =>
-          setTimeout(resolve, durationInSeconds)
-        );
-      } catch (error) {
-        console.error('Error playing sound:', error);
-      }
-    }
-  }
-
+  
   if (!music) {
     Alert.alert('Please pick a music choice');
     return;
@@ -561,41 +532,13 @@ const handlePress = async (music, cycle) => {
     return;
   }
 
-  let soundFile = '';
-  switch (music[0]) {
-    case 'Waves':
-      soundFile = 'waves.mp3';
-      break;
-    case 'Rain':
-      soundFile = 'waves.mp3';
-      break;
-    case 'Fire':
-      soundFile = 'waves.mp3';
-      break;
-    case 'Forest':
-      soundFile = 'waves.mp3';
-      break;
-    case 'Meditation':
-      soundFile = 'waves.mp3';
-      break;
-    case 'Birds':
-      soundFile = 'waves.mp3';
-      break;
-    default:
-      console.log('Invalid music choice');
-      return;
-  }
-
-  if (soundFile) {
-    const pagePath = window.location.href;
-    
-    navigation.navigate('FocusTimerScreen', {music: music, cycle: cycle, reference:pagePath});
-    await playSound(`../../assets/sounds/${soundFile}`, cycle);
-  }
+  navigation.navigate('FocusTimerScreen', {music: music[0], cycle: cycle});
+  
 };
 
 return (
     <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
           <CustomButton
@@ -632,12 +575,10 @@ return (
       />
       
       <View style={styles.button}>
-        <CustomButton
-          text="Start"
-          //onPress={() => handlePress(music, cycle)}
-          href='HomeScreen'
-          type="SECONDARY"
-        />
+        <TouchableOpacity style={styles.container_SECONDARY}
+          onPress={() => handlePress(music, cycle)}>
+          <Text style={styles.text_SECONDARY}>Start</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -650,7 +591,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -676,7 +617,20 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     flexDirection: 'column-reverse',
-    paddingBottom: 10,
+    paddingBottom: 50,
+  },
+  container_SECONDARY: {
+    backgroundColor: '#457f9d',
+    width: 150,
+    padding: 8.5,
+    marginVertical: 5,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  text_SECONDARY: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 24,
   },
 });
 

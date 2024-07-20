@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import { View, SafeAreaView,  Text,  Image,  StyleSheet,  Alert, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { CustomButton } from '../../components/CustomButton';
-import { CustomSelect } from '../../components/CustomSelect';
-import Logo from '../../assets/images/Logo.png';
+import { CustomButton } from '../components/CustomButton';
+import { CustomSelect } from '../components/CustomSelect';
+import Logo from '../assets/images/Logo.png';
+import { Stack } from "expo-router";
 
 const DayMusicSelectionScreen = () => {
   const [music, setMusic] = useState('');
@@ -35,9 +29,10 @@ const DayMusicSelectionScreen = () => {
 
   return (
     <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
-          <CustomButton text="<" href="/" type="blackBackButton" />
+          <CustomButton text="<" href="DayBreathingScreen" type="blackBackButton" />
         </View>
         <View
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
@@ -67,12 +62,10 @@ const DayMusicSelectionScreen = () => {
       />
 
       <View style={styles.button}>
-        <CustomButton
-          text="Start"
-          href=""
-          onPress={() => handlePress(music, cycle)}
-          type="SECONDARY"
-        />
+        <TouchableOpacity style={styles.container_SECONDARY}
+          onPress={() => handlePress(music, cycle)}>
+          <Text style={styles.text_SECONDARY}>Start</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -85,7 +78,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -105,7 +98,20 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     flexDirection: 'column-reverse',
-    paddingBottom: 10,
+    paddingBottom: 50,
+  },
+  container_SECONDARY: {
+    backgroundColor: '#457f9d',
+    width: 150,
+    padding: 8.5,
+    marginVertical: 5,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  text_SECONDARY: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 24,
   },
 });
 
