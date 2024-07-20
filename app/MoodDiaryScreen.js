@@ -176,7 +176,15 @@ const MoodDiaryScreen = () => {
         />
       </View>
       <Text style={{fontSize:30}}>{'\n'}</Text>
-      <View style={{ backgroundColor: '#f27c7a', width: 350,  padding: 18,  alignSelf: 'center',  borderRadius: 30,}}>
+      <View style={{ backgroundColor: '#457f9d', width: 350,  padding: 18,  alignSelf: 'center',  borderRadius: 30, marginBottom: 30}}>
+        <TouchableOpacity
+        
+        onPress={() => navigation.goBack()}>
+        
+        <Text style={styles.text_someButton}>{'Go Back'}</Text>
+        </TouchableOpacity>
+        </View>
+        <View style={{ backgroundColor: '#f27c7a', width: 350,  padding: 18,  alignSelf: 'center',  borderRadius: 30,}}>
         <TouchableOpacity
         
         onPress={() => navigation.navigate('HomeScreen')}>

@@ -1,22 +1,28 @@
 import React from 'react';
-import { View, SafeAreaView, Text, StyleSheet,} from 'react-native';
-import { useNavigation } from 'expo-router';
-import { CustomButton } from '../../components/CustomButton';
+import { View, SafeAreaView, Text, StyleSheet, Image} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import { Stack } from "expo-router";
 
 const ExercisesScreen = () => {
- const navigation = useNavigation();
 
+ 
   return (
     <SafeAreaView style={[styles.root]}>
+      <Stack.Screen options={{ header: () => null }} />
       <View style={styles.header}>
         <View style={{ width: 100 }}>
           <CustomButton text="<" href='HomeScreen' type="blackBackButton" />
         </View>
+        <View style={{ marginRight: 170 }}>
+            <Image source={Logo} style={styles.logo} resizeMode="cover" />
+          </View>
       </View>
 
       <Text style={styles.title}>Rest your Mind</Text>
       <Text style={styles.subtitle}>Exercises</Text>
 
+      
       <CustomButton
         text="Destress Your Day"
         href="DayBreathingScreen"
@@ -42,11 +48,11 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#E8B9B3',
+    
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -89,11 +95,25 @@ const styles = StyleSheet.create({
     fontSize: 30, // You can adjust the font size if needed
     fontWeight: 'bold', // You can adjust the font weight if needed
   },
+  logo: {
+    maxWidth: 75,
+    maxHeight: 75,
+    marginVertical: 10,
+  },
   buttonText: {
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
   },
+  container_EXERCISE: {
+    backgroundColor: '#457f9d',
+    width: 175,
+    height: 175,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
+  },
+  
   // end here
 });
 export default ExercisesScreen;

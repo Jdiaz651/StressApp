@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-  Animated,
-} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, Animated,} from 'react-native';
 import Svg, { G, Path, Circle } from 'react-native-svg';
-import { useLocalSearchParams } from 'expo-router';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import Volume from '../../assets/images/Volume.png';
-import Waves from '../../assets/gif/waves3.gif';
-import Rain from '../../assets/gif/rain2.gif';
-import Fire from '../../assets/gif/fire.gif';
-import Forest from '../../assets/gif/forest3.gif';
-import Meditation from '../../assets/gif/meditation3.gif';
-import Birds from '../../assets/gif/birds3.gif';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import Volume from '../assets/images/Volume.png';
+import FocusTimeGif from '../assets/gif/FocusTimeGif3.gif'; // Gif is not in sync with timer, longer times will decrease quality
+import WavesImage from '../assets/gif/waves3.gif';
+import RainImage from '../assets/gif/rain2.gif';
+import FireImage from '../assets/gif/fire.gif';
+import ForestImage from '../assets/gif/forest3.gif';
+import MeditationImage from '../assets/gif/meditation3.gif';
+import BirdsImage from '../assets/gif/birds3.gif';
+import { useNavigation } from 'expo-router';
+import { useRoute } from '@react-navigation/native';
+import { Audio } from 'expo-av';
+import { Stack } from "expo-router";
 
-const FocusTimerScreen = ({ navigation }) => {
+const soundFiles = {
+  'waves.mp3': require('../assets/sounds/waves.mp3'),
+  'rain.mp3': require('../assets/sounds/rain.mp3'),
+  'fire.mp3': require('../assets/sounds/fire.mp3'),
+  'forest.mp3': require('../assets/sounds/forest.mp3'),
+  'meditation.mp3': require('../assets/sounds/meditation.mp3'),
+  'birds.mp3': require('../assets/sounds/birds.mp3'),
+};
+
+const FocusTimerScreen = () => {
+
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { music, cycle } = route.params;
   const [timer, setTimer] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(null);
-
+  const [backgroundImage, setBackgroundImage] = useState();
   const window = useWindowDimensions();
   const size = window.width - 100;
-
-  const { music, cycle } = useLocalSearchParams();
-
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);
   const [pos, setPos] = useState(new Animated.ValueXY(0, 0));
   const min = Math.floor(timer / 60);
   const sec = timer % 60 < 10 ? '0' + (timer % 60).toString() : timer % 60;
-  const stage = Math.ceil(timer / 4) % 4;
+  const stage = Math.ceil(timer / 4) % 3;
   const text = [
     'Breathe In\nThrough One Nostril',
-    'Hold',
-    'Breathe Out\nThrough Other Nostril',
+    'Breathe In\nThrough One Nostril',
     'Pinch Both\nNostrils & Hold',
   ];
 
@@ -79,55 +82,86 @@ const FocusTimerScreen = ({ navigation }) => {
     ).start();
   };
 
+  const soundRef = useRef(null);
+
   useEffect(() => {
-    switch (music) {
-      case 'Waves':
-        setBackgroundImage(Waves);
-        break;
-      case 'Rain':
-        setBackgroundImage(Rain);
-        break;
-      case 'Fire':
-        setBackgroundImage(Fire);
-        break;
-      case 'Forest':
-        setBackgroundImage(Forest);
-        break;
-      case 'Meditation':
-        setBackgroundImage(Meditation);
-        break;
-      case 'Birds':
-        setBackgroundImage(Birds);
-        break;
+    async function playSound(soundFile) {
+      console.log('Loading Sound');
+      const { sound } = await Audio.Sound.createAsync(soundFiles[soundFile]);
+      soundRef.current = sound;
+  
+      console.log('Playing Sound');
+      await sound.playAsync();
     }
 
+    const setBackground = () => {
+      let soundFile = '';
+      switch (music) {
+        case 'Waves':
+          setBackgroundImage(WavesImage);
+          soundFile = 'waves.mp3';
+          break;
+        case 'Rain':
+          setBackgroundImage(RainImage);
+          soundFile = 'rain.mp3';
+          break;
+        case 'Fire':
+          setBackgroundImage(FireImage);
+          soundFile = 'fire.mp3';
+          break;
+        case 'Forest':
+          setBackgroundImage(ForestImage);
+          soundFile = 'forest.mp3';
+          break;
+        case 'Meditation':
+          setBackgroundImage(MeditationImage);
+          soundFile = 'meditation.mp3';
+          break;
+        case 'Birds':
+          setBackgroundImage(BirdsImage);
+          soundFile = 'birds.mp3';
+          break;
+      }
+      if (soundFile) {
+        playSound(soundFile);
+      }
+    };
+
+    setBackground();
     pos.x.resetAnimation();
     pos.y.resetAnimation();
     animation();
-    setTimer(16 * cycle);
-    var counter = 0;
-    var countdown = setInterval(() => {
-      setTimer((lastTimer) => {
-        lastTimer <= 1 && clearInterval(countdown);
-        return lastTimer - 1;
-      });
-      counter++;
-      if (counter == 16 * cycle) {
+    setTimer(14 * cycle);
+    
+    const countdown = setInterval(() => {
+    setTimer((lastTimer) => {
+      if (lastTimer <= 1) {
         clearInterval(countdown);
         pos.stopAnimation();
-        navigation.navigate('Exercises');
+        if (soundRef.current) {
+          soundRef.current.stopAsync(); // Stop the sound
+        }
+        navigation.navigate('FocusBreathingScreen');
       }
-    }, 1000);
-    return () => clearInterval(countdown);
+      return lastTimer - 1;
+    });
+  }, 1000);
+  return () => {
+    clearInterval(countdown);
+    if (soundRef.current) {
+      soundRef.current.unloadAsync();
+    }
+  };
   }, []);
 
   return (
     <SafeAreaView style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <ImageBackground source={backgroundImage} style={styles.background}>
         <View style={styles.overlay} />
         <View style={styles.header}>
           <View style={{ width: 100 }}>
-            <CustomButton text="<" href="/" type="blackBackButton" />
+            <CustomButton text="<" href="FocusMusicSelectionScreen" type="whiteBackButton" />
           </View>
           <Image source={Logo} style={styles.logo} resizeMode="cover" />
           <View style={{ width: 100 }}>
@@ -138,8 +172,9 @@ const FocusTimerScreen = ({ navigation }) => {
         <Text style={styles.timer}>
           {min}:{sec}
         </Text>
-
+        
         <View style={styles.container}>
+          {/*
           <Svg height={size} width={size} style={styles.slider}>
             <G scale={size / 244}>
               <AnimatedCircle cx={posX} cy={posY} r="12" fill="#EDE9E9" />
@@ -171,7 +206,11 @@ const FocusTimerScreen = ({ navigation }) => {
               </G>
             </G>
           </Svg>
-          <Animated.Text style={styles.text}>{text[stage]}</Animated.Text>
+          */}
+          <Animated.Text style={styles.text}>{text[stage]}{'\n'}</Animated.Text>
+        </View>
+        <View style={styles.container}>
+        <Image source={FocusTimeGif} style={styles.FocusTimeGif} />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -192,7 +231,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -225,6 +264,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+  },
+  FocusTimeGif: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 370,
+    maxHeight: 290,
   },
 });
 

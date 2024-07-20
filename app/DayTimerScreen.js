@@ -1,35 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-  Animated,
-} from 'react-native';
+import { View, SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, ImageBackground, Animated,} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Svg, { G, Path, Circle } from 'react-native-svg';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import Volume from '../../assets/images/Volume.png';
-import WavesImage from '../../assets/gif/waves3.gif';
-import RainImage from '../../assets/gif/rain2.gif';
-import FireImage from '../../assets/gif/fire.gif';
-import ForestImage from '../../assets/gif/forest3.gif';
-import MeditationImage from '../../assets/gif/meditation3.gif';
-import BirdsImage from '../../assets/gif/birds3.gif';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import Volume from '../assets/images/Volume.png';
+import DayTimeGif from '../assets/gif/DayTimeGif11.gif'; // Gif is not in sync with timer, longer times will decrease quality
+import WavesImage from '../assets/gif/waves3.gif';
+import RainImage from '../assets/gif/rain2.gif';
+import FireImage from '../assets/gif/fire.gif';
+import ForestImage from '../assets/gif/forest3.gif';
+import MeditationImage from '../assets/gif/meditation3.gif';
+import BirdsImage from '../assets/gif/birds3.gif';
 import { useNavigation } from 'expo-router';
 import { Audio } from 'expo-av';
+import { Stack } from "expo-router";
 
 const soundFiles = {
-  'waves.mp3': require('../../assets/sounds/waves.mp3'),
-  'rain.mp3': require('../../assets/sounds/rain.mp3'),
-  'fire.mp3': require('../../assets/sounds/fire.mp3'),
-  'forest.mp3': require('../../assets/sounds/forest.mp3'),
-  'meditation.mp3': require('../../assets/sounds/meditation.mp3'),
-  'birds.mp3': require('../../assets/sounds/birds.mp3'),
+  'waves.mp3': require('../assets/sounds/waves.mp3'),
+  'rain.mp3': require('../assets/sounds/rain.mp3'),
+  'fire.mp3': require('../assets/sounds/fire.mp3'),
+  'forest.mp3': require('../assets/sounds/forest.mp3'),
+  'meditation.mp3': require('../assets/sounds/meditation.mp3'),
+  'birds.mp3': require('../assets/sounds/birds.mp3'),
 };
 
 const DayTimerScreen = () => {
@@ -160,14 +153,15 @@ const DayTimerScreen = () => {
   
   return (
     <SafeAreaView style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <ImageBackground source={backgroundImage} style={styles.background}>
         <View style={styles.overlay} />
         <View style={styles.header}>
           <View style={{ width: 100 }}>
             <CustomButton
               text="<"
-              href='HomeScreen'
-              type="blackBackButton"
+              href='DayMusicSelectionScreen'
+              type="whiteBackButton"
             />
           </View>
           <Image source={Logo} style={styles.logo} resizeMode="cover" />
@@ -216,6 +210,9 @@ const DayTimerScreen = () => {
           </Svg>*/}
           <Animated.Text style={styles.text}>{text[stage]}</Animated.Text>
         </View>
+        <View style={styles.container}>
+        <Image source={DayTimeGif} style={styles.DayTimeGif} />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -235,7 +232,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -268,6 +265,12 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFFFFF',
+  },
+  DayTimeGif: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 350,
+    maxHeight: 300,
   },
 });
 

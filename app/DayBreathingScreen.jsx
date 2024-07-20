@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
-
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import movingSky from '../../assets/gif/movingsky.gif';
+import { View, SafeAreaView, Text, Image, StyleSheet, ImageBackground,} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import movingSky from '../assets/gif/movingsky.gif';
+import { Stack } from "expo-router";
 
 const DayBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <ImageBackground source={movingSky} style={styles.background}>
         <View style={styles.overlay} />
         <View style={styles.header}>
@@ -61,6 +55,14 @@ const DayBreathingScreen = () => {
           </Text>
         </Text>
 
+        <Text style={styles.baseText}>
+          Hold your breathe for <Text style={styles.italic}> 4 </Text>
+          <Text style={styles.baseText}>
+            {' '}
+            seconds.
+          </Text>
+        </Text>
+
         <View style={styles.button}>
           <CustomButton text="Next" href="DayMusicSelectionScreen" type="SECONDARY" />
         </View>
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     flexDirection: 'column-reverse',
-    paddingBottom: 10,
+    paddingBottom: 50,
   },
 });
 

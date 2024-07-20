@@ -1,22 +1,17 @@
-import {
-  View,
-  SafeAreaView,
-  Text,
-  Image,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
-import { CustomButton } from '../../components/CustomButton';
-import Logo from '../../assets/images/Logo.png';
-import Cloud from '../../assets/gif/cloud.gif';
+import { View, SafeAreaView, Text, Image, StyleSheet, ImageBackground,} from 'react-native';
+import { CustomButton } from '../components/CustomButton';
+import Logo from '../assets/images/Logo.png';
+import Cloud from '../assets/gif/cloud.gif';
+import { Stack } from "expo-router";
 
 const FocusBreathingScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
+      <Stack.Screen options={{ header: () => null }} />
       <ImageBackground source={Cloud} style={styles.background}>
         <View style={styles.header}>
           <View style={{ width: 100 }}>
-            <CustomButton text="<" type="blackBackButton" href="ExercisesScreen" />
+            <CustomButton text="<" type="whiteBackButton" href="ExercisesScreen" />
           </View>
           <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
@@ -33,7 +28,7 @@ const FocusBreathingScreen = () => {
 
         <Text style={styles.baseText}>
           Pinch one nostril and breathe in through the other nostril for
-          <Text style={styles.italic}> 4</Text>
+          <Text style={styles.italic}> 4 </Text>
           <Text style={styles.baseText}>seconds.</Text>
         </Text>
 
@@ -75,7 +70,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 100,
+    height: 160,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -107,30 +102,39 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#000000',
+    color: 'white',
     marginVertical: 5,
     textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
   },
   baseText: {
     fontSize: 22,
     fontWeight: 'normal',
-    color: '#000000',
+    color: 'white',
     marginVertical: 10,
     textAlign: 'center',
     paddingHorizontal: 15,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 5,
   },
   italic: {
     fontStyle: 'italic',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#000000',
+    color: 'white',
     marginVertical: 10,
     textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 5,
   },
   button: {
     flex: 1,
     flexDirection: 'column-reverse',
-    paddingBottom: 10,
+    paddingBottom: 50,
   },
 });
 

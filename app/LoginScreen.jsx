@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { KeyboardAvoidingView, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions, ScrollView, ImageBackground } from 'react-native';
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '../../firebase.js';
-import { firestore, getDoc, setDoc, doc } from '../../firebase.js';
-import Logo from '../../assets/images/Logo.png';
-import SignInBackground from '../../assets/gif/SignInBackGround.gif';
-import GoogleButton from '../../assets/images/SignInWithGoogle.png'
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '../firebase.js';
+import Logo from '../assets/images/Logo.png';
+import SignInBackground from '../assets/gif/SignInBackGround.gif';
+import GoogleButton from '../assets/images/SignInWithGoogle.png'
+import { Stack } from "expo-router";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -43,7 +43,7 @@ const handleSignUp = () => {
  
  return (
   <KeyboardAvoidingView behavior="padding" style={{ height: height }}>
-   
+   <Stack.Screen options={{ header: () => null }} />
    <ImageBackground source={SignInBackground} style={styles.background}>
    <View style={styles.container} />
         <Image
